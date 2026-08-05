@@ -4,7 +4,7 @@
 
 **Portfolio site with an interactive lead-generation chatbot**
 
-[![Live Site](https://img.shields.io/badge/live-kerolos--design-2f4538?style=for-the-badge)](https://kerolosadly-co.github.io/Portfolio/) 
+[![Live Site](https://img.shields.io/badge/live-kerolos--Portfolio-2f4538?style=for-the-badge)](https://kerolosadly-co.github.io/Portfolio/) 
 [![GitHub Pages](https://img.shields.io/badge/hosted%20on-GitHub%20Pages-a9814f?style=for-the-badge&logo=github)](https://pages.github.com/)
 [![No Backend](https://img.shields.io/badge/backend-none-6c6a5f?style=for-the-badge)]()
 
