@@ -3,1168 +3,1408 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kerolos A. — Logo &amp; Brand Identity Designer</title>
+<meta name="description" content="Kerolos A. — Logo & Brand Identity Designer based in Alexandria, Egypt. Bold, purposeful marks for brands that mean business.">
+<title>Kerolos A. — Brand Identity Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --ink:#1a1d23;
-    --paper:#f4f6f8;
-    --paper-2:#e7ebf0;
-    --forest:#2c3e50;
-    --forest-deep:#18222c;
-    --brass:#4a7fa6;
-    --brass-light:#6fa3c9;
-    --muted:#5b6470;
-    --line: rgba(26,29,35,0.13);
-    --max: 1180px;
-    --serif: "Fraunces", Georgia, serif;
-    --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-    --mono: "IBM Plex Mono", monospace;
-  }
+/* ============================================================
+   DESIGN TOKENS — Light & Modern
+   ============================================================ */
+:root {
+  --white:    #ffffff;
+  --off:      #f8f7f4;
+  --off-2:    #f0ede8;
+  --ink:      #111111;
+  --ink-2:    #333333;
+  --muted:    #777777;
+  --line:     rgba(17,17,17,0.10);
+  --accent:   #2563eb;
+  --accent-2: #1d4ed8;
+  --accent-l: #eff6ff;
+  --gold:     #b45309;
+  --max:      1200px;
+  --serif:    "Playfair Display", Georgia, serif;
+  --sans:     "DM Sans", -apple-system, sans-serif;
+  --mono:     "Space Mono", monospace;
+  --ease:     cubic-bezier(0.16, 1, 0.3, 1);
+  --radius:   4px;
+}
 
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
   }
+}
+body {
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { font-family: inherit; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap;
+}
 
-  body{
-    background:var(--paper);
-    color:var(--ink);
-    font-family:var(--sans);
-    font-size:16px;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 48px; }
+@media (max-width: 640px) { .wrap { padding: 0 24px; } }
 
-  a{color:inherit;}
-  img{display:block; max-width:100%;}
+/* ============================================================
+   CURSOR DOT
+   ============================================================ */
+.cursor {
+  position: fixed; top: 0; left: 0; z-index: 9999;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--accent);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s var(--ease), height 0.3s var(--ease), opacity 0.3s;
+}
+.cursor.grow { width: 36px; height: 36px; opacity: 0.18; }
+@media (hover: none) { .cursor { display: none; } }
 
-  ::selection{background:var(--brass-light); color:var(--forest-deep);}
+/* ============================================================
+   HEADER / NAV
+   ============================================================ */
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+header.scrolled { border-bottom-color: var(--line); }
+header .wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 76px;
+}
+.logo {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.logo em { color: var(--accent); font-style: italic; }
 
-  .wrap{max-width:var(--max); margin:0 auto; padding:0 40px;}
-  @media (max-width:640px){ .wrap{padding:0 22px;} }
+nav { display: flex; align-items: center; gap: 36px; }
+nav a {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  transition: color 0.2s;
+  position: relative;
+  padding-bottom: 3px;
+}
+nav a::after {
+  content: "";
+  position: absolute; left: 0; right: 100%; bottom: 0;
+  height: 1px; background: var(--accent);
+  transition: right 0.25s var(--ease);
+}
+nav a:hover { color: var(--ink); }
+nav a:hover::after { right: 0; }
+.nav-hire {
+  padding: 9px 20px;
+  background: var(--accent);
+  color: var(--white) !important;
+  font-size: 12px !important;
+  letter-spacing: 0.06em;
+  border-radius: var(--radius);
+  transition: background 0.2s, transform 0.2s !important;
+}
+.nav-hire::after { display: none !important; }
+.nav-hire:hover { background: var(--accent-2) !important; transform: translateY(-1px); }
 
-  .eyebrow{
-    font-family:var(--mono);
-    font-size:12px;
-    letter-spacing:0.12em;
-    text-transform:uppercase;
-    color:var(--brass);
-    display:flex;
-    align-items:center;
-    gap:10px;
-  }
-  .eyebrow::before{
-    content:"";
-    width:22px; height:1px;
-    background:var(--brass);
-    display:inline-block;
-  }
+.burger {
+  display: none;
+  flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.burger span {
+  display: block; width: 24px; height: 1.5px;
+  background: var(--ink);
+  transition: transform 0.3s var(--ease), opacity 0.3s;
+}
+.burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-  /* ---------- NAV ---------- */
-  header.site{
-    position:fixed; top:0; left:0; right:0; z-index:50;
-    background:rgba(246,243,236,0.86);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid transparent;
-    transition:border-color .3s ease, background .3s ease;
-  }
-  header.site.scrolled{ border-bottom-color:var(--line); }
-  header.site .wrap{
-    display:flex; align-items:center; justify-content:space-between;
-    height:76px;
-  }
-  .logomark{
-    font-family:var(--serif);
-    font-weight:500;
-    font-size:19px;
-    letter-spacing:0.01em;
-  }
-  .logomark span{ color:var(--brass); font-style:italic; }
-  nav.links{ display:flex; gap:34px; }
-  nav.links a{
-    font-size:13px;
-    letter-spacing:0.04em;
-    text-decoration:none;
-    color:var(--ink);
-    position:relative;
-    padding-bottom:4px;
-  }
-  nav.links a::after{
-    content:"";
-    position:absolute; left:0; right:100%; bottom:0;
-    height:1px; background:var(--forest);
-    transition:right .25s ease;
-  }
-  nav.links a:hover::after{ right:0; }
-  @media (max-width:720px){ nav.links{display:none;} }
-  nav.links a.nav-cta{
-    padding:8px 16px;
-    border:1px solid var(--forest);
-    color:var(--forest);
-  }
-  nav.links a.nav-cta::after{ display:none; }
-  nav.links a.nav-cta:hover{ background:var(--forest); color:var(--paper); }
+.mobile-nav {
+  display: none;
+  position: fixed; inset: 0; top: 76px; z-index: 99;
+  background: var(--white);
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 32px;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a {
+  font-family: var(--serif);
+  font-size: clamp(28px, 6vw, 48px);
+  font-weight: 700;
+  color: var(--ink);
+  transition: color 0.2s;
+}
+.mobile-nav a:hover { color: var(--accent); }
 
-  /* ---------- HERO ---------- */
-  .hero{
-    padding:168px 0 96px;
-    position:relative;
-    overflow:hidden;
-  }
-  .hero::before{
-    content:"";
-    position:absolute; top:-120px; right:-160px;
-    width:520px; height:520px;
-    border-radius:50%;
-    background:radial-gradient(circle at 30% 30%, var(--paper-2), transparent 70%);
-    opacity:.7;
-    pointer-events:none;
-  }
-  .hero-grid{
-    display:grid;
-    grid-template-columns:1.4fr 1fr;
-    gap:60px;
-    align-items:end;
-  }
-  @media (max-width:860px){ .hero-grid{grid-template-columns:1fr; gap:28px;} }
+@media (max-width: 768px) {
+  nav { display: none; }
+  .burger { display: flex; }
+}
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
 
-  .hero h1{
-    font-family:var(--serif);
-    font-weight:400;
-    font-size:clamp(40px, 6vw, 80px);
-    line-height:1.02;
-    letter-spacing:-0.01em;
-    margin-top:22px;
-  }
-  .hero h1 em{
-    font-style:italic;
-    font-weight:400;
-    color:var(--forest);
-  }
-  .hero-sub{
-    margin-top:26px;
-    max-width:480px;
-    color:var(--muted);
-    font-size:17px;
-  }
-  .hero-side{
-    border-left:1px solid var(--line);
-    padding-left:28px;
-    font-family:var(--mono);
-    font-size:13px;
-    color:var(--muted);
-    line-height:1.9;
-  }
-  .hero-side strong{
-    display:block;
-    color:var(--ink);
-    font-family:var(--sans);
-    font-size:14px;
-    font-weight:600;
-    margin-bottom:6px;
-  }
-  .hero-cta{
-    margin-top:38px;
-    display:flex; gap:16px; flex-wrap:wrap;
-  }
-  .btn{
-    display:inline-flex; align-items:center; gap:10px;
-    padding:13px 26px;
-    font-size:13px;
-    letter-spacing:0.03em;
-    text-decoration:none;
-    border-radius:2px;
-    transition:transform .2s ease, background .2s ease, color .2s ease;
-  }
-  .btn-primary{
-    background:var(--forest); color:var(--paper);
-  }
-  .btn-primary:hover{ background:var(--forest-deep); transform:translateY(-2px); }
-  .btn-ghost{
-    border:1px solid var(--line);
-    color:var(--ink);
-  }
-  .btn-ghost:hover{ border-color:var(--forest); transform:translateY(-2px); }
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding-bottom: 80px;
+  position: relative;
+  overflow: hidden;
+  background: var(--off);
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 55% 45% at 85% 15%, rgba(37,99,235,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 55% at 5% 85%, rgba(37,99,235,0.04) 0%, transparent 50%);
+}
+.hero-grid-lines {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 80px 80px;
+  opacity: 0.5;
+}
+.hero-content { position: relative; z-index: 2; }
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 28px;
+}
+.hero-tag::before {
+  content: "";
+  width: 28px; height: 1px;
+  background: var(--accent);
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(48px, 8.5vw, 120px);
+  font-weight: 900;
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+.hero h1 .line { display: block; overflow: hidden; }
+.hero h1 .line span {
+  display: block;
+  transform: translateY(110%);
+  animation: slideUp 1s var(--ease) forwards;
+}
+.hero h1 .line:nth-child(2) span { animation-delay: 0.1s; }
+.hero h1 .line:nth-child(3) span { animation-delay: 0.2s; }
+.hero h1 em { color: var(--accent); font-style: italic; }
+@keyframes slideUp { to { transform: translateY(0); } }
 
-  /* ---------- SECTION HEADS ---------- */
-  section{ padding:104px 0; border-top:1px solid var(--line); }
-  .sec-head{
-    display:flex; justify-content:space-between; align-items:flex-end;
-    gap:24px; margin-bottom:56px; flex-wrap:wrap;
-  }
-  .sec-head h2{
-    font-family:var(--serif);
-    font-weight:400;
-    font-size:clamp(30px, 3.6vw, 46px);
-    margin-top:14px;
-  }
-  .sec-note{ max-width:320px; color:var(--muted); font-size:14.5px; text-align:right; }
-  @media (max-width:700px){ .sec-note{ text-align:left; } }
+.hero-bottom {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-top: 56px; gap: 32px; flex-wrap: wrap;
+}
+.hero-desc {
+  max-width: 420px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.8;
+}
+.hero-desc strong { color: var(--ink); font-weight: 500; }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
 
-  /* ---------- WORK — slideshow ---------- */
-  .folio-slideshow{
-    position:relative;
-    display:flex; align-items:center; gap:18px;
-  }
-  .folio-viewport{
-    position:relative;
-    flex:1;
-    min-height:520px;
-    border:1px solid var(--line);
-    background:var(--paper);
-    overflow:hidden;
-  }
-  @media (max-width:640px){ .folio-viewport{ min-height:440px; } }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 13px 28px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: var(--radius);
+  transition: all 0.25s var(--ease);
+  cursor: pointer; border: none;
+  font-family: var(--sans);
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--white);
+  font-weight: 500;
+}
+.btn-primary:hover { background: var(--accent-2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.25); }
+.btn-outline {
+  border: 1.5px solid var(--line);
+  color: var(--ink);
+  background: transparent;
+}
+.btn-outline:hover { border-color: var(--ink); transform: translateY(-2px); }
 
-  .folio-slide{
-    position:absolute; inset:0;
-    display:grid; grid-template-rows:auto 1fr;
-    opacity:0;
-    transform:translateX(28px);
-    pointer-events:none;
-    transition:opacity .55s ease, transform .55s ease;
-  }
-  .folio-slide.active{
-    opacity:1; transform:none; pointer-events:auto; position:relative;
-  }
+.scroll-hint {
+  position: absolute; bottom: 28px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted);
+  animation: fadeIn 1.5s 1.2s both;
+}
+.scroll-hint::after {
+  content: "";
+  width: 1px; height: 36px;
+  background: linear-gradient(to bottom, var(--muted), transparent);
+  animation: scrollLine 1.6s ease-in-out infinite;
+}
+@keyframes scrollLine {
+  0%, 100% { transform: scaleY(1); opacity: 1; }
+  50% { transform: scaleY(0.4); opacity: 0.4; }
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-  .folio-thumb{
-    height:420px; width:100%;
-    overflow:hidden;
-    background:var(--forest-deep);
-  }
-  @media (max-width:640px){ .folio-thumb{ height:320px; } }
-  .folio-thumb img{
-    width:100%; height:100%; object-fit:cover;
-  }
+/* ============================================================
+   MARQUEE STRIP
+   ============================================================ */
+.marquee-strip {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 16px 0;
+  overflow: hidden;
+  background: var(--white);
+}
+.marquee-track {
+  display: flex;
+  animation: marquee 24s linear infinite;
+  width: max-content;
+}
+.marquee-track span {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0 36px;
+  white-space: nowrap;
+}
+.marquee-track span.accent { color: var(--accent); font-size: 8px; }
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
 
-  .folio-body{ padding:22px 30px 0; }
-  .folio-meta{
-    font-family:var(--mono); font-size:11px; letter-spacing:.06em;
-    color:var(--brass); text-transform:uppercase; margin-bottom:8px;
-  }
-  .folio-slide h3{
-    font-family:var(--serif); font-weight:500; font-size:24px;
-  }
+/* ============================================================
+   SECTION SHARED
+   ============================================================ */
+.section { padding: 112px 0; }
+.section-label {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 18px;
+}
+.section-label::before {
+  content: attr(data-num);
+  color: var(--muted);
+  font-size: 10px;
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(34px, 4.5vw, 60px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.section-title em { color: var(--accent); font-style: italic; }
 
-  .fs-arrow{
-    flex-shrink:0;
-    width:44px; height:44px; border-radius:50%;
-    border:1px solid var(--line);
-    background:var(--paper);
-    color:var(--ink);
-    display:flex; align-items:center; justify-content:center;
-    cursor:pointer;
-    transition:background .2s ease, color .2s ease, border-color .2s ease, transform .15s ease;
-  }
-  .fs-arrow:hover{ background:var(--forest); color:var(--paper); border-color:var(--forest); transform:translateY(-1px); }
-  @media (max-width:640px){ .fs-arrow{ width:36px; height:36px; } }
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
 
-  .fs-dots{
-    display:flex; flex-wrap:wrap; justify-content:center; gap:8px;
-    margin-top:26px;
-  }
-  .fs-dots button{
-    width:7px; height:7px; border-radius:50%;
-    border:none; background:var(--line);
-    cursor:pointer; padding:0;
-    transition:background .25s ease, transform .25s ease, width .25s ease;
-  }
-  .fs-dots button.active{
-    background:var(--brass);
-    width:20px; border-radius:4px;
-  }
+/* ============================================================
+   STATS BAR
+   ============================================================ */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--white);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+}
+@media (max-width: 640px) { .stats-bar { grid-template-columns: repeat(2, 1fr); } }
+.stat {
+  padding: 36px 28px;
+  border-right: 1px solid var(--line);
+}
+.stat:last-child { border-right: none; }
+@media (max-width: 640px) {
+  .stat:nth-child(2) { border-right: none; }
+  .stat:nth-child(3) { border-top: 1px solid var(--line); }
+  .stat:nth-child(4) { border-top: 1px solid var(--line); border-right: none; }
+}
+.stat-num {
+  font-family: var(--serif);
+  font-size: clamp(32px, 3.5vw, 48px);
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-label { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; }
 
-  /* ---------- APPROACH ---------- */
-  .approach-grid{
-    display:grid; grid-template-columns:repeat(3,1fr); gap:44px;
-  }
-  @media (max-width:760px){ .approach-grid{grid-template-columns:1fr; gap:36px;} }
-  .approach-item{
-    opacity:0; transform:translateY(14px);
-    transition:opacity .6s ease, transform .6s ease;
-  }
-  .approach-item.in{ opacity:1; transform:none; }
-  .approach-page{
-    font-family:var(--mono); font-size:12px; color:var(--brass); margin-bottom:16px;
-  }
-  .approach-item h3{
-    font-family:var(--serif); font-weight:500; font-size:22px; margin-bottom:12px;
-  }
-  .approach-item p{ color:var(--muted); font-size:14.5px; }
+/* ============================================================
+   WORK GRID
+   ============================================================ */
+#work { background: var(--off); }
+.work-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 24px; margin-bottom: 56px; flex-wrap: wrap;
+}
+.work-filter { display: flex; gap: 6px; flex-wrap: wrap; }
+.filter-btn {
+  padding: 8px 18px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--white);
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--sans);
+}
+.filter-btn.active, .filter-btn:hover {
+  background: var(--accent);
+  color: var(--white);
+  border-color: var(--accent);
+}
 
-  /* ---------- ABOUT ---------- */
-  .about-grid{
-    display:grid; grid-template-columns:0.8fr 1.2fr; gap:64px; align-items:start;
-  }
-  @media (max-width:820px){ .about-grid{grid-template-columns:1fr; gap:36px;} }
-  .about-portrait{
-    aspect-ratio:4/5; width:100%;
-    background:linear-gradient(160deg, var(--paper-2), var(--forest) 140%);
-    position:relative;
-    border:1px solid var(--line);
-  }
-  .about-portrait::before{
-    content:"K.A.";
-    position:absolute; inset:0;
-    display:flex; align-items:center; justify-content:center;
-    font-family:var(--serif); font-style:italic; font-size:52px;
-    color:rgba(246,243,236,0.65);
-  }
-  .about-copy p{ color:var(--muted); font-size:16px; margin-bottom:18px; max-width:60ch; }
-  .about-copy p:first-child{ color:var(--ink); font-size:19px; font-family:var(--serif); line-height:1.5; }
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+}
+.work-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--white);
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: box-shadow 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.work-card:hover { box-shadow: 0 16px 48px rgba(0,0,0,0.10); transform: translateY(-3px); }
+.work-card:nth-child(1) { grid-column: span 7; }
+.work-card:nth-child(2) { grid-column: span 5; }
+.work-card:nth-child(3) { grid-column: span 4; }
+.work-card:nth-child(4) { grid-column: span 4; }
+.work-card:nth-child(5) { grid-column: span 4; }
+.work-card:nth-child(6) { grid-column: span 5; }
+.work-card:nth-child(7) { grid-column: span 7; }
+.work-card:nth-child(8) { grid-column: span 6; }
+.work-card:nth-child(9) { grid-column: span 6; }
+@media (max-width: 900px) { .work-card { grid-column: span 6 !important; } }
+@media (max-width: 560px) { .work-card { grid-column: span 12 !important; } }
 
-  .skill-list{ margin-top:32px; display:flex; flex-wrap:wrap; gap:10px; }
-  .skill-list span{
-    font-family:var(--mono); font-size:12px;
-    border:1px solid var(--line); padding:7px 13px;
-    color:var(--ink);
-  }
+.work-card-inner { aspect-ratio: 4/3; position: relative; overflow: hidden; }
+.work-card:nth-child(1) .work-card-inner,
+.work-card:nth-child(7) .work-card-inner { aspect-ratio: 16/9; }
+.work-card-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s var(--ease);
+  background: var(--off-2);
+}
+.work-card:hover .work-card-img { transform: scale(1.05); }
+.work-card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(17,17,17,0.75) 0%, transparent 55%);
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 24px;
+}
+.work-card:hover .work-card-overlay { opacity: 1; }
+.work-card-cat {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 4px;
+}
+.work-card-title {
+  font-family: var(--serif);
+  font-size: clamp(15px, 1.8vw, 20px);
+  font-weight: 700;
+  color: var(--white);
+}
+.work-card-body { padding: 16px 20px 20px; }
+.work-card-body .work-card-cat {
+  color: var(--accent);
+  opacity: 1;
+  margin-bottom: 4px;
+}
+.work-card-body .work-card-title {
+  color: var(--ink);
+  font-size: 15px;
+}
 
-  .edu-block{
-    margin-top:34px;
-    padding-top:26px;
-    border-top:1px solid var(--line);
-  }
-  .edu-block .approach-page{ margin-bottom:10px; }
-  .edu-block h4{ font-family:var(--serif); font-weight:500; font-size:18px; margin-bottom:4px; }
-  .edu-block p{ color:var(--muted); font-size:14px; margin:0; }
+/* ============================================================
+   PROCESS
+   ============================================================ */
+.process-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 56px;
+}
+@media (max-width: 700px) { .process-grid { grid-template-columns: 1fr; } }
+.process-item {
+  padding: 44px 36px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+.process-item:hover { box-shadow: 0 8px 32px rgba(37,99,235,0.08); border-color: rgba(37,99,235,0.2); }
+.process-item::before {
+  content: attr(data-step);
+  position: absolute; top: -16px; right: 20px;
+  font-family: var(--serif);
+  font-size: 96px;
+  font-weight: 900;
+  color: rgba(37,99,235,0.04);
+  line-height: 1;
+  pointer-events: none;
+}
+.process-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  margin-bottom: 18px;
+}
+.process-item h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+.process-item p { color: var(--muted); font-size: 14px; line-height: 1.85; }
 
-  /* ---------- TESTIMONIALS ---------- */
-  .t-carousel{
-    position:relative;
-    min-height:280px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-  .t-slide{
-    position:absolute;
-    inset:0;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-    max-width:640px;
-    margin:0 auto;
-    opacity:0;
-    transform:translateY(14px);
-    pointer-events:none;
-    transition:opacity .7s ease, transform .7s ease;
-  }
-  .t-slide.active{
-    opacity:1;
-    transform:none;
-    pointer-events:auto;
-    position:relative;
-  }
-  .t-avatar{
-    width:64px; height:64px;
-    border-radius:50%;
-    overflow:hidden;
-    margin-bottom:22px;
-    border:2px solid var(--paper);
-    box-shadow:0 2px 10px rgba(28,36,32,0.12);
-  }
-  .t-avatar svg{ width:100%; height:100%; display:block; }
-  .t-quote{
-    font-family:var(--serif);
-    font-style:italic;
-    font-size:clamp(18px, 2.4vw, 24px);
-    line-height:1.55;
-    color:var(--ink);
-    margin-bottom:18px;
-  }
-  .t-name{ font-size:14px; font-weight:600; }
-  .t-role{ font-family:var(--mono); font-size:11.5px; color:var(--muted); margin-top:2px; }
+/* ============================================================
+   ABOUT
+   ============================================================ */
+#about { background: var(--off); }
+.about-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 72px;
+  align-items: start;
+}
+@media (max-width: 860px) { .about-layout { grid-template-columns: 1fr; gap: 40px; } }
+.about-visual { position: sticky; top: 100px; }
+.about-portrait {
+  aspect-ratio: 3/4;
+  background: linear-gradient(160deg, var(--off-2) 0%, #dbeafe 100%);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 72px;
+  font-weight: 900;
+  color: rgba(37,99,235,0.15);
+  position: relative;
+  overflow: hidden;
+}
+.about-portrait-badge {
+  position: absolute; bottom: -14px; right: -14px;
+  width: 96px; height: 96px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white);
+  font-weight: 700;
+  line-height: 1.5;
+  padding: 10px;
+  animation: rotateBadge 14s linear infinite;
+}
+@keyframes rotateBadge { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .about-portrait-badge { animation: none; } }
 
-  .t-dots{
-    display:flex; justify-content:center; gap:9px;
-    margin-top:34px;
-  }
-  .t-dots button{
-    width:8px; height:8px;
-    border-radius:50%;
-    border:none;
-    background:var(--line);
-    cursor:pointer;
-    padding:0;
-    transition:background .25s ease, transform .25s ease;
-  }
-  .t-dots button.active{
-    background:var(--brass);
-    transform:scale(1.3);
-  }
-  .t-thanks{
-    text-align:center;
-    margin-top:50px;
-    padding-top:34px;
-    border-top:1px solid var(--line);
-    font-family:var(--serif);
-    font-size:17px;
-    color:var(--forest);
-  }
+.about-copy { padding-top: 4px; }
+.about-lead {
+  font-family: var(--serif);
+  font-size: clamp(19px, 2.2vw, 26px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+.about-copy p { color: var(--muted); font-size: 15px; line-height: 1.85; margin-bottom: 16px; }
+.skills { display: flex; flex-wrap: wrap; gap: 8px; margin: 28px 0; }
+.skill-tag {
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  background: var(--white);
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.skill-tag:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-l); }
+.edu-card {
+  margin-top: 28px;
+  padding: 22px 24px;
+  border-left: 3px solid var(--accent);
+  background: var(--white);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.edu-card .mono-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.edu-card h4 { font-family: var(--serif); font-size: 16px; font-weight: 700; margin-bottom: 4px; color: var(--ink); }
+.edu-card p { color: var(--muted); font-size: 13px; margin: 0; }
 
-  /* ---------- CONTACT / FOOTER ---------- */
-  footer{
-    border-top:1px solid var(--line);
-    background:var(--forest-deep);
-    color:var(--paper);
-    padding:100px 0 44px;
-  }
-  footer .eyebrow{ color:var(--brass-light); }
-  footer .eyebrow::before{ background:var(--brass-light); }
-  footer h2{
-    font-family:var(--serif); font-weight:400;
-    font-size:clamp(32px, 5vw, 58px);
-    margin-top:18px; max-width:16ch;
-  }
-  footer .email-link{
-    display:inline-block; margin-top:30px;
-    font-family:var(--mono); font-size:16px;
-    color:var(--paper); text-decoration:none;
-    border-bottom:1px solid var(--brass-light);
-    padding-bottom:4px;
-  }
-  .foot-bottom{
-    margin-top:100px; padding-top:26px;
-    border-top:1px solid rgba(246,243,236,0.14);
-    display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px;
-    font-family:var(--mono); font-size:12px;
-    color:rgba(246,243,236,0.55);
-  }
-  .foot-links{ display:flex; gap:22px; }
-  .foot-links a{ text-decoration:none; color:rgba(246,243,236,0.75); }
-  .foot-links a:hover{ color:var(--paper); }
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.testimonials-layout {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 56px;
+}
+@media (max-width: 700px) { .testimonials-layout { grid-template-columns: 1fr; } }
+.testimonial-card {
+  padding: 40px 36px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  position: relative;
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+.testimonial-card:hover { box-shadow: 0 8px 32px rgba(37,99,235,0.08); border-color: rgba(37,99,235,0.2); }
+.testimonial-card::before {
+  content: "\201C";
+  position: absolute; top: 20px; right: 28px;
+  font-family: var(--serif);
+  font-size: 72px;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.12;
+}
+.testimonial-stars {
+  display: flex; gap: 3px; margin-bottom: 16px;
+}
+.testimonial-stars span { color: #f59e0b; font-size: 14px; }
+.testimonial-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(15px, 1.6vw, 18px);
+  line-height: 1.65;
+  color: var(--ink-2);
+  margin-bottom: 24px;
+}
+.testimonial-author { display: flex; align-items: center; gap: 14px; }
+.testimonial-avatar {
+  width: 48px; height: 48px; border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--off-2);
+  flex-shrink: 0;
+  background: var(--off-2);
+}
+.testimonial-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.testimonial-avatar svg { width: 100%; height: 100%; }
+.testimonial-name { font-size: 14px; font-weight: 500; color: var(--ink); }
+.testimonial-role { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-top: 2px; }
+.testimonial-flag { font-size: 16px; margin-left: 4px; }
 
-  /* focus visibility */
-  a:focus-visible, button:focus-visible{
-    outline:2px solid var(--brass);
-    outline-offset:3px;
-  }
+/* ============================================================
+   FOOTER / CONTACT
+   ============================================================ */
+footer { background: var(--ink); color: var(--white); }
+.footer-cta {
+  padding: 112px 0 72px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.footer-cta::before {
+  content: "HELLO";
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--serif);
+  font-size: clamp(80px, 18vw, 220px);
+  font-weight: 900;
+  color: rgba(255,255,255,0.03);
+  white-space: nowrap;
+  pointer-events: none;
+  letter-spacing: -0.04em;
+}
+.footer-cta .section-label { justify-content: center; color: rgba(255,255,255,0.5); }
+.footer-cta .section-label::before { color: rgba(255,255,255,0.3); }
+.footer-cta h2 {
+  font-family: var(--serif);
+  font-size: clamp(38px, 6.5vw, 88px);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  margin-bottom: 36px;
+  color: var(--white);
+}
+.footer-cta h2 em { color: var(--accent); font-style: italic; }
+.footer-contact-links {
+  display: flex; align-items: center; justify-content: center;
+  gap: 28px; flex-wrap: wrap; margin-top: 40px;
+}
+.footer-contact-links a {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  padding-bottom: 3px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.footer-contact-links a:hover { color: var(--white); border-color: var(--white); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 24px 0;
+}
+.footer-bottom .wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 14px;
+}
+.footer-bottom-copy { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 0.06em; }
+.footer-bottom-links { display: flex; gap: 24px; }
+.footer-bottom-links a { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.06em; transition: color 0.2s; }
+.footer-bottom-links a:hover { color: var(--white); }
 
-  /* ---------- CHATBOT WIDGET ---------- */
-  .cb-toggle{
-    position:fixed; right:24px; bottom:24px; z-index:300;
-    width:60px; height:60px; border-radius:50%;
-    background:var(--forest); color:var(--paper);
-    border:none; cursor:pointer;
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:0 10px 30px rgba(28,36,32,0.28);
-    transition:transform .2s ease, background .2s ease;
-  }
-  .cb-toggle:hover{ background:var(--forest-deep); transform:translateY(-2px); }
-  .cb-toggle svg{ width:26px; height:26px; }
-  .cb-toggle .cb-dot{
-    position:absolute; top:6px; right:6px;
-    width:10px; height:10px; border-radius:50%;
-    background:var(--brass-light);
-    border:2px solid var(--paper);
-    display:none;
-  }
-  .cb-toggle.cb-unseen .cb-dot{ display:block; }
+/* ============================================================
+   CHATBOT WIDGET
+   ============================================================ */
+.cb-toggle {
+  position: fixed; right: 24px; bottom: 24px; z-index: 300;
+  width: 58px; height: 58px; border-radius: 50%;
+  background: var(--accent); color: var(--white);
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 28px rgba(37,99,235,0.35);
+  transition: transform 0.2s var(--ease), background 0.2s;
+}
+.cb-toggle:hover { background: var(--accent-2); transform: translateY(-2px); }
+.cb-toggle svg { width: 24px; height: 24px; }
+.cb-dot {
+  position: absolute; top: 5px; right: 5px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #22c55e;
+  border: 2px solid var(--white);
+  display: none;
+}
+.cb-toggle.cb-unseen .cb-dot { display: block; }
 
-  .cb-panel{
-    position:fixed; right:24px; bottom:96px; z-index:300;
-    width:360px; max-width:calc(100vw - 32px);
-    height:520px; max-height:calc(100vh - 140px);
-    background:var(--paper);
-    border:1px solid var(--line);
-    border-radius:10px;
-    box-shadow:0 24px 60px rgba(28,36,32,0.28);
-    display:flex; flex-direction:column;
-    overflow:hidden;
-    opacity:0; transform:translateY(16px) scale(0.98);
-    pointer-events:none;
-    transition:opacity .22s ease, transform .22s ease;
-  }
-  .cb-panel.cb-open{
-    opacity:1; transform:none; pointer-events:auto;
-  }
+.cb-panel {
+  position: fixed; right: 24px; bottom: 94px; z-index: 300;
+  width: 368px; max-width: calc(100vw - 32px);
+  height: 540px; max-height: calc(100vh - 130px);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.14);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  opacity: 0; transform: translateY(14px) scale(0.97);
+  pointer-events: none;
+  transition: opacity 0.22s var(--ease), transform 0.22s var(--ease);
+}
+.cb-panel.cb-open { opacity: 1; transform: none; pointer-events: auto; }
 
-  .cb-header{
-    background:var(--forest); color:var(--paper);
-    padding:16px 18px;
-    display:flex; align-items:center; justify-content:space-between;
-    flex-shrink:0;
-  }
-  .cb-header-info{ display:flex; align-items:center; gap:10px; }
-  .cb-avatar{
-    width:34px; height:34px; border-radius:50%;
-    background:var(--brass-light);
-    display:flex; align-items:center; justify-content:center;
-    font-family:var(--serif); font-style:italic; color:var(--forest-deep);
-    font-size:16px; flex-shrink:0;
-  }
-  .cb-header-text strong{ display:block; font-family:var(--sans); font-size:14px; font-weight:600; }
-  .cb-header-text span{ display:block; font-size:11.5px; color:var(--paper-2); opacity:.85; }
-  .cb-header-actions{ display:flex; align-items:center; gap:4px; }
-  .cb-close, .cb-restart{
-    background:none; border:none; color:var(--paper);
-    cursor:pointer; padding:6px; opacity:.85; display:flex;
-    border-radius:6px;
-    transition:opacity .15s ease, background .15s ease;
-  }
-  .cb-close:hover, .cb-restart:hover{ opacity:1; background:rgba(246,243,236,0.12); }
+.cb-header {
+  background: var(--accent); color: var(--white);
+  padding: 14px 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+}
+.cb-header-info { display: flex; align-items: center; gap: 10px; }
+.cb-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-style: italic;
+  color: var(--white); font-size: 16px; flex-shrink: 0;
+}
+.cb-header-text strong { display: block; font-size: 14px; font-weight: 600; }
+.cb-header-text span { display: block; font-size: 11px; opacity: 0.75; }
+.cb-header-actions { display: flex; gap: 4px; }
+.cb-close, .cb-restart {
+  background: none; border: none; color: var(--white);
+  cursor: pointer; padding: 6px; opacity: 0.8; display: flex;
+  border-radius: 6px;
+  transition: opacity 0.15s, background 0.15s;
+}
+.cb-close:hover, .cb-restart:hover { opacity: 1; background: rgba(255,255,255,0.15); }
 
-  .cb-badge{
-    display:inline-block;
-    font-family:var(--mono);
-    font-size:10px;
-    letter-spacing:.05em;
-    text-transform:uppercase;
-    background:var(--brass-light);
-    color:var(--forest-deep);
-    padding:2px 8px;
-    border-radius:10px;
-    margin-left:6px;
-    vertical-align:middle;
-  }
+.cb-badge {
+  display: inline-block;
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  background: rgba(255,255,255,0.2);
+  color: var(--white);
+  padding: 2px 7px; border-radius: 10px;
+  margin-left: 5px; vertical-align: middle;
+}
 
-  .cb-messages{
-    flex:1; overflow-y:auto; padding:18px;
-    display:flex; flex-direction:column; gap:12px;
-    background:var(--paper);
-  }
-  .cb-messages::-webkit-scrollbar{ width:6px; }
-  .cb-messages::-webkit-scrollbar-thumb{ background:var(--line); border-radius:3px; }
+.cb-messages {
+  flex: 1; overflow-y: auto; padding: 16px;
+  display: flex; flex-direction: column; gap: 10px;
+  background: var(--off);
+}
+.cb-messages::-webkit-scrollbar { width: 4px; }
+.cb-messages::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
 
-  .cb-row{ display:flex; flex-direction:column; max-width:86%; }
-  .cb-row.bot{ align-self:flex-start; align-items:flex-start; }
-  .cb-row.user{ align-self:flex-end; align-items:flex-end; }
+.cb-row { display: flex; flex-direction: column; max-width: 88%; }
+.cb-row.bot { align-self: flex-start; align-items: flex-start; }
+.cb-row.user { align-self: flex-end; align-items: flex-end; }
+.cb-bubble {
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+.cb-row.bot .cb-bubble {
+  background: var(--white);
+  color: var(--ink);
+  border-bottom-left-radius: 4px;
+  border: 1px solid var(--line);
+}
+.cb-row.user .cb-bubble {
+  background: var(--accent);
+  color: var(--white);
+  border-bottom-right-radius: 4px;
+}
+.cb-row.bot .cb-bubble ul { margin: 6px 0 0 18px; }
+.cb-row.bot .cb-bubble li { margin-bottom: 3px; }
 
-  .cb-bubble{
-    padding:10px 14px;
-    border-radius:14px;
-    font-size:13.5px;
-    line-height:1.55;
-  }
-  .cb-row.bot .cb-bubble{
-    background:var(--paper-2);
-    color:var(--ink);
-    border-bottom-left-radius:4px;
-  }
-  .cb-row.user .cb-bubble{
-    background:var(--forest);
-    color:var(--paper);
-    border-bottom-right-radius:4px;
-  }
-  .cb-row.bot .cb-bubble ul{ margin:6px 0 0 18px; }
-  .cb-row.bot .cb-bubble li{ margin-bottom:3px; }
+.cb-options {
+  display: flex; flex-direction: column; gap: 7px;
+  align-self: flex-start; max-width: 88%; margin-top: 2px;
+}
+.cb-opt-btn {
+  text-align: left;
+  padding: 9px 14px;
+  font-size: 13px;
+  font-family: var(--sans);
+  background: var(--white);
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+}
+.cb-opt-btn:hover { background: var(--accent); color: var(--white); }
+.cb-opt-btn:disabled { opacity: 0.45; cursor: default; }
 
-  .cb-options{
-    display:flex; flex-direction:column; gap:8px;
-    align-self:flex-start; max-width:86%; margin-top:2px;
-  }
-  .cb-opt-btn{
-    text-align:left;
-    padding:10px 14px;
-    font-size:13px;
-    font-family:var(--sans);
-    background:var(--paper);
-    color:var(--forest);
-    border:1px solid var(--forest);
-    border-radius:8px;
-    cursor:pointer;
-    transition:background .18s ease, color .18s ease;
-  }
-  .cb-opt-btn:hover{ background:var(--forest); color:var(--paper); }
-  .cb-opt-btn:disabled{ opacity:.5; cursor:default; }
+.cb-form {
+  align-self: flex-start; max-width: 94%;
+  display: flex; flex-direction: column; gap: 8px;
+  margin-top: 2px;
+}
+.cb-form input {
+  padding: 10px 12px;
+  font-size: 13.5px;
+  font-family: var(--sans);
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  color: var(--ink);
+  transition: border-color 0.2s;
+}
+.cb-form input:focus { outline: none; border-color: var(--accent); }
+.cb-form .cb-submit {
+  padding: 10px 14px;
+  font-size: 13px;
+  background: var(--accent);
+  color: var(--white);
+  border: none; border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.18s;
+  font-family: var(--sans);
+}
+.cb-form .cb-submit:hover { background: var(--accent-2); }
+.cb-form .cb-submit:disabled { opacity: 0.6; cursor: default; }
+.cb-form-err { font-size: 11.5px; color: #dc2626; display: none; }
 
-  .cb-form{
-    align-self:flex-start; max-width:92%;
-    display:flex; flex-direction:column; gap:8px;
-    margin-top:2px;
-  }
-  .cb-form input{
-    padding:10px 12px;
-    font-size:13.5px;
-    font-family:var(--sans);
-    border:1px solid var(--line);
-    border-radius:6px;
-    background:#fff;
-    color:var(--ink);
-  }
-  .cb-form input:focus{ outline:none; border-color:var(--forest); }
-  .cb-form .cb-submit{
-    padding:10px 14px;
-    font-size:13px;
-    background:var(--forest);
-    color:var(--paper);
-    border:none; border-radius:6px;
-    cursor:pointer;
-    transition:background .18s ease;
-  }
-  .cb-form .cb-submit:hover{ background:var(--forest-deep); }
-  .cb-form .cb-submit:disabled{ opacity:.6; cursor:default; }
-  .cb-form-err{ font-size:11.5px; color:#a3403a; display:none; }
+.cb-typing {
+  align-self: flex-start;
+  display: flex; gap: 4px; padding: 12px 14px;
+  background: var(--white); border-radius: 14px; border-bottom-left-radius: 4px;
+  border: 1px solid var(--line);
+}
+.cb-typing span {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--muted); opacity: 0.5;
+  animation: cbTyping 1.1s infinite ease-in-out;
+}
+.cb-typing span:nth-child(2) { animation-delay: 0.15s; }
+.cb-typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes cbTyping {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
 
-  .cb-typing{
-    align-self:flex-start;
-    display:flex; gap:4px; padding:12px 14px;
-    background:var(--paper-2); border-radius:14px; border-bottom-left-radius:4px;
-  }
-  .cb-typing span{
-    width:6px; height:6px; border-radius:50%;
-    background:var(--muted); opacity:.5;
-    animation:cbTyping 1.1s infinite ease-in-out;
-  }
-  .cb-typing span:nth-child(2){ animation-delay:.15s; }
-  .cb-typing span:nth-child(3){ animation-delay:.3s; }
-  @keyframes cbTyping{
-    0%,60%,100%{ transform:translateY(0); opacity:.5; }
-    30%{ transform:translateY(-4px); opacity:1; }
-  }
-
-  @media (max-width:480px){
-    .cb-panel{ right:16px; left:16px; width:auto; bottom:88px; }
-    .cb-toggle{ right:16px; bottom:16px; }
-  }
+@media (max-width: 480px) {
+  .cb-panel { right: 12px; left: 12px; width: auto; bottom: 84px; }
+  .cb-toggle { right: 16px; bottom: 16px; }
+}
 </style>
 </head>
 <body>
 
-<header class="site" id="siteHeader">
+<div class="cursor" id="cursor"></div>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+  <a href="#work" class="mobile-link">Work</a>
+  <a href="#process" class="mobile-link">Process</a>
+  <a href="#about" class="mobile-link">About</a>
+  <a href="#testimonials" class="mobile-link">Clients</a>
+  <a href="#contact" class="mobile-link">Contact</a>
+</nav>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header id="siteHeader">
   <div class="wrap">
-    <div class="logomark">Kerolos A<span>.</span></div>
-    <nav class="links">
+    <div class="logo">K<em>.</em>A</div>
+    <nav aria-label="Primary navigation">
       <a href="#work">Work</a>
-      <a href="#approach">Approach</a>
+      <a href="#process">Process</a>
       <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-      <a href="https://www.upwork.com/freelancers/~0155c31d90e911681f" target="_blank" rel="noopener" class="nav-cta">Hire me on Upwork</a>
+      <a href="#testimonials">Clients</a>
+      <a href="https://www.upwork.com/freelancers/~0155c31d90e911681f" target="_blank" rel="noopener" class="nav-hire">Hire me</a>
     </nav>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
-<main>
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <div class="eyebrow">Portfolio — Alexandria, Egypt</div>
-        <h1>Marks that make a<br>brand <em>distinct</em>.</h1>
-        <p class="hero-sub">I'm a logo &amp; brand identity designer helping startups, agencies, consultants, and small businesses stand out with minimalist, purposeful marks that speak clearly to their audience.</p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="#work">View selected work</a>
-          <a class="btn btn-ghost" href="https://www.upwork.com/freelancers/~0155c31d90e911681f" target="_blank" rel="noopener">Hire me on Upwork</a>
-        </div>
-      </div>
-      <div class="hero-side">
-        <strong>Currently</strong>
-        Designing logo &amp; brand identity systems — from wordmark through stationery and mockups.
-      </div>
-    </div>
-  </section>
-
-  <section id="work">
-    <div class="wrap">
-      <div class="sec-head">
-        <div>
-          <div class="eyebrow">Selected Work</div>
-          <h2>Logo &amp; brand identity</h2>
-        </div>
-        <p class="sec-note">A working index of recent logo design projects across industries.</p>
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines" aria-hidden="true"></div>
+  <div class="wrap hero-content">
+    <div class="hero-tag">Logo &amp; Brand Identity Designer</div>
+    <h1>
+      <span class="line"><span>Marks</span></span>
+      <span class="line"><span>that <em>define</em></span></span>
+      <span class="line"><span>brands.</span></span>
+    </h1>
+    <div class="hero-bottom">
+      <p class="hero-desc">
+        I'm <strong>Kerolos A.</strong> — a brand identity designer helping
+        startups, agencies, and businesses stand out with
+        <strong>minimalist, purposeful marks</strong> that speak clearly to their audience.
+      </p>
+      <div class="hero-actions">
+        <a href="#work" class="btn btn-primary">View Work</a>
+        <a href="#contact" class="btn btn-outline">Start a Project</a>
       </div>
     </div>
-    <div class="wrap">
-      <div class="folio-slideshow" id="folioSlideshow">
-        <button class="fs-arrow fs-prev" id="fsPrev" aria-label="Previous project">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
+  </div>
+  <div class="scroll-hint" aria-hidden="true">Scroll</div>
+</section>
 
-        <div class="folio-viewport" id="folioViewport">
+<!-- ============================================================
+     MARQUEE
+     ============================================================ -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Logo Design</span><span class="accent">✦</span>
+    <span>Brand Identity</span><span class="accent">✦</span>
+    <span>Visual Systems</span><span class="accent">✦</span>
+    <span>Stationery Design</span><span class="accent">✦</span>
+    <span>3D Mockups</span><span class="accent">✦</span>
+    <span>Wedding Invitations</span><span class="accent">✦</span>
+    <span>Vector Files</span><span class="accent">✦</span>
+    <span>Print Design</span><span class="accent">✦</span>
+    <span>Logo Design</span><span class="accent">✦</span>
+    <span>Brand Identity</span><span class="accent">✦</span>
+    <span>Visual Systems</span><span class="accent">✦</span>
+    <span>Stationery Design</span><span class="accent">✦</span>
+    <span>3D Mockups</span><span class="accent">✦</span>
+    <span>Wedding Invitations</span><span class="accent">✦</span>
+    <span>Vector Files</span><span class="accent">✦</span>
+    <span>Print Design</span><span class="accent">✦</span>
+  </div>
+</div>
 
-          <article class="folio-slide active" data-index="0">
-            <div class="folio-thumb"><img src="rose.jpg" alt="Rose Architecture Construction logo on office wall"></div>
-            <div class="folio-body">
-              <div class="folio-meta">Logo Design</div>
-              <h3>Rose Architecture &amp; Construction</h3>
-            </div>
-          </article>
-
-          <article class="folio-slide" data-index="1">
-            <div class="folio-thumb"><img src="greenhill.jpg" alt="Greenhill logo on textured paper"></div>
-            <div class="folio-body">
-              <div class="folio-meta">Logo Design</div>
-              <h3>Greenhill</h3>
-            </div>
-          </article>
-
-          <article class="folio-slide" data-index="2">
-            <div class="folio-thumb"><img src="elegant.jpg" alt="Elegant logo on reception wall"></div>
-            <div class="folio-body">
-              <div class="folio-meta">Logo Design</div>
-              <h3>Elegant</h3>
-            </div>
-          </article>
-
-          <article class="folio-slide" data-index="3">
-            <div class="folio-thumb"><img src="mindville.jpg" alt="Mindville logo on office wall"></div>
-            <div class="folio-body">
-              <div class="folio-meta">Logo Design</div>
-              <h3>Mindville</h3>
-            </div>
-          </article>
-
-          <article class="folio-slide" data-index="4">
-            <div class="folio-thumb"><img src="sutari.jpg" alt="Sutari logo on wood paneling"></div>
-            <div class="folio-body">
-              <div class="folio-meta">Logo Design</div>
-              <h3>Sutari</h3>
-            </div>
-          </article>
-
-          <article class="folio-slide" data-index="5">
-            <div class="folio-thumb"><img src="diamond.jpg" alt="Diamond Fashion Studio logo"></div>
-            <div class="folio-body">
-              <div class="folio-meta">Logo Design</div>
-              <h3>Diamond Fashion Studio</h3>
-            </div>
-          </article>
-
-          <article class="folio-slide" data-index="6">
-            <div class="folio-thumb"><img src="alterna.jpg" alt="Alterna Automotive logo"></div>
-            <div class="folio-body">
-              <div class="folio-meta">Logo Design</div>
-              <h3>Alterna Automotive</h3>
-            </div>
-          </article>
-
-          <article class="folio-slide" data-index="7">
-            <div class="folio-thumb"><img src="carcare.jpg" alt="Car Care logo embossed on paper"></div>
-            <div class="folio-body">
-              <div class="folio-meta">Logo Design</div>
-              <h3>Car Care</h3>
-            </div>
-          </article>
-
-          <article class="folio-slide" data-index="8">
-            <div class="folio-thumb"><img src="aulia.jpg" alt="Aulia logo in gold foil"></div>
-            <div class="folio-body">
-              <div class="folio-meta">Logo Design</div>
-              <h3>Aulia</h3>
-            </div>
-          </article>
-
-          <article class="folio-slide" data-index="9">
-            <div class="folio-thumb"><img src="coffeesuntuy.jpg" alt="Coffee Suntuy logo on storefront sign"></div>
-            <div class="folio-body">
-              <div class="folio-meta">Logo Design</div>
-              <h3>Coffee Suntuy</h3>
-            </div>
-          </article>
-
-          <article class="folio-slide" data-index="10">
-            <div class="folio-thumb"><img src="happyshop.jpg" alt="Happy Shop logo on storefront sign"></div>
-            <div class="folio-body">
-              <div class="folio-meta">Logo Design</div>
-              <h3>Happy Shop</h3>
-            </div>
-          </article>
-
-          <article class="folio-slide" data-index="11">
-            <div class="folio-thumb"><img src="weddinginvitations.jpg" alt="Wedding invitation suite designs"></div>
-            <div class="folio-body">
-              <div class="folio-meta">Print &amp; Stationery</div>
-              <h3>Wedding Invitations</h3>
-            </div>
-          </article>
-
-        </div>
-
-        <button class="fs-arrow fs-next" id="fsNext" aria-label="Next project">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
-      </div>
-
-      <div class="fs-dots" id="fsDots"></div>
-    </div>
-  </section>
-
-  <section id="approach">
-    <div class="wrap">
-      <div class="sec-head">
-        <div>
-          <div class="eyebrow">Approach</div>
-          <h2>How the work gets made</h2>
-        </div>
-        <p class="sec-note">Three principles I return to on every brief, regardless of scale.</p>
-      </div>
-      <div class="approach-grid">
-        <div class="approach-item">
-          <div class="approach-page">p. 01</div>
-          <h3>Start with the audience</h3>
-          <p>A mark only works if it speaks clearly to the people it's for. I start every brief by understanding who the brand needs to reach, not just what it wants to say.</p>
-        </div>
-        <div class="approach-item">
-          <div class="approach-page">p. 02</div>
-          <h3>Minimalist by discipline</h3>
-          <p>Restraint is a design decision, not a shortcut. I strip a mark down until every remaining line is doing real work — nothing decorative, nothing accidental.</p>
-        </div>
-        <div class="approach-item">
-          <div class="approach-page">p. 03</div>
-          <h3>Deliver the full system</h3>
-          <p>Every project ships with guidelines, vector files, and mockups — so the identity keeps working consistently across signage, stationery, and print.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="about">
-    <div class="wrap">
-      <div class="sec-head">
-        <div>
-          <div class="eyebrow">About</div>
-          <h2>A little context</h2>
-        </div>
-      </div>
-      <div class="about-grid">
-        <div class="about-portrait"></div>
-        <div class="about-copy">
-          <p>Good design means good business — I design logos and brand identities for startups, agencies, consultants, small businesses, and non-profits that want to stand out and attract the right clients.</p>
-          <p>Your brand is distinct. Your logo should be too. I work closely with you to design a mark that reflects your vision and speaks clearly to your target audience.</p>
-          <div class="skill-list">
-            <span>Logo Design</span>
-            <span>Brand Identity &amp; Guidelines</span>
-            <span>Vector File Format</span>
-            <span>Minimalist</span>
-            <span>Stationery Design</span>
-            <span>Greeting Cards &amp; Invitations</span>
-            <span>Printable File</span>
-            <span>3D Mockup</span>
-          </div>
-          <div class="edu-block">
-            <div class="approach-page">Education</div>
-            <h4>Faculty of Commerce, Alexandria University</h4>
-            <p>Bachelor's degree, Management Information Systems (MIS) — 2018–2022</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="testimonials" style="border-top:1px solid var(--line); background:var(--paper-2);">
-    <div class="wrap">
-      <div class="sec-head">
-        <div>
-          <div class="eyebrow">Client Words</div>
-          <h2>What people are saying</h2>
-        </div>
-        <p class="sec-note">Notes from clients outside Upwork — real feedback on finished work.</p>
-      </div>
-
-      <div class="t-carousel" id="tCarousel">
-
-        <div class="t-slide" data-index="0">
-          <div class="t-avatar t-avatar-man">
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="50" cy="50" r="50" fill="var(--forest)"/>
-              <circle cx="50" cy="40" r="17" fill="var(--paper)"/>
-              <path d="M50 60c-19 0-32 12-32 27a2 2 0 0 0 2 2h60a2 2 0 0 0 2-2c0-15-13-27-32-27z" fill="var(--paper)"/>
-            </svg>
-          </div>
-          <p class="t-quote">"Kerolos understood exactly what our brand needed — clean, minimal, and memorable. The whole process was smooth from brief to final files."</p>
-          <div class="t-name">Youssef M.</div>
-          <div class="t-role">Founder, Retail Startup</div>
-        </div>
-
-        <div class="t-slide" data-index="1">
-          <div class="t-avatar t-avatar-woman">
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="50" cy="50" r="50" fill="var(--brass)"/>
-              <path d="M30 38c0-12 9-21 20-21s20 9 20 21c0 3-1 6-2 8l4 6-8 2 2 7-8-1-3 8-5-6-5 6-3-8-8 1 2-7-8-2 4-6c-1-2-2-5-2-8z" fill="var(--paper)"/>
-              <circle cx="50" cy="40" r="14" fill="var(--paper)"/>
-            </svg>
-          </div>
-          <p class="t-quote">"Thank you for such a thoughtful logo — it captured our vibe better than we could describe it ourselves. Fast delivery too!"</p>
-          <div class="t-name">Salma H.</div>
-          <div class="t-role">Owner, Coffee Shop</div>
-        </div>
-
-        <div class="t-slide" data-index="2">
-          <div class="t-avatar t-avatar-man">
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="50" cy="50" r="50" fill="var(--forest-deep)"/>
-              <circle cx="50" cy="40" r="17" fill="var(--paper)"/>
-              <path d="M50 60c-19 0-32 12-32 27a2 2 0 0 0 2 2h60a2 2 0 0 0 2-2c0-15-13-27-32-27z" fill="var(--paper)"/>
-            </svg>
-          </div>
-          <p class="t-quote">"Professional, responsive, and genuinely talented. Our new identity looks great on everything from the storefront sign to business cards."</p>
-          <div class="t-name">Omar T.</div>
-          <div class="t-role">Director, Automotive Services</div>
-        </div>
-
-        <div class="t-slide" data-index="3">
-          <div class="t-avatar t-avatar-woman">
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="50" cy="50" r="50" fill="var(--brass-light)"/>
-              <path d="M30 38c0-12 9-21 20-21s20 9 20 21c0 3-1 6-2 8l4 6-8 2 2 7-8-1-3 8-5-6-5 6-3-8-8 1 2-7-8-2 4-6c-1-2-2-5-2-8z" fill="var(--forest-deep)"/>
-              <circle cx="50" cy="40" r="14" fill="var(--forest-deep)"/>
-            </svg>
-          </div>
-          <p class="t-quote">"Exactly what we asked for, and then some. Kerolos added little details we hadn't even thought of. Highly recommend for brand work."</p>
-          <div class="t-name">Nour K.</div>
-          <div class="t-role">Marketing Lead, Fashion Studio</div>
-        </div>
-
-      </div>
-
-      <div class="t-dots" id="tDots"></div>
-
-      <p class="t-thanks">Thank you to everyone who trusted me with their brand — every project here was made possible by clients like you. 🙏</p>
-    </div>
-  </section>
-</main>
-
-<footer id="contact">
+<!-- ============================================================
+     STATS
+     ============================================================ -->
+<section class="section" id="stats" aria-label="Key statistics">
   <div class="wrap">
-    <div class="eyebrow">Get in touch</div>
-    <h2>Let's design your next mark.</h2>
-    <a class="email-link" href="mailto:kerolosadly584@gmail.com">kerolosadly584@gmail.com</a>
-    <div style="margin-top:18px;">
-      <a class="email-link" href="https://www.upwork.com/freelancers/~0155c31d90e911681f" target="_blank" rel="noopener">View my Upwork profile →</a>
+    <div class="stats-bar reveal">
+      <div class="stat">
+        <div class="stat-num" data-target="50">0</div>
+        <div class="stat-label">Projects delivered</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-target="40">0</div>
+        <div class="stat-label">Happy clients</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-target="5">0</div>
+        <div class="stat-label">Years experience</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-target="100">0</div>
+        <div class="stat-label">5-star reviews</div>
+      </div>
     </div>
+  </div>
+</section>
 
-    <div class="foot-bottom">
-      <span>© 2026 Kerolos A. All rights reserved.</span>
-      <div class="foot-links">
+<!-- ============================================================
+     WORK
+     ============================================================ -->
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="work-header">
+      <div>
+        <div class="section-label" data-num="02">Selected Work</div>
+        <h2 class="section-title">Recent <em>projects</em></h2>
+      </div>
+      <div class="work-filter" role="group" aria-label="Filter projects">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="logo">Logo</button>
+        <button class="filter-btn" data-filter="brand">Branding</button>
+        <button class="filter-btn" data-filter="print">Print</button>
+      </div>
+    </div>
+    <div class="work-grid" id="workGrid">
+
+      <article class="work-card reveal" data-category="logo brand">
+        <div class="work-card-inner">
+          <img class="work-card-img" src="rose.jpg" alt="Rose Architecture & Construction logo" loading="eager" width="800" height="450">
+          <div class="work-card-overlay">
+            <div class="work-card-cat">Logo Design</div>
+            <div class="work-card-title">Rose Architecture &amp; Construction</div>
+          </div>
+        </div>
+        <div class="work-card-body">
+          <div class="work-card-cat">Logo Design</div>
+          <div class="work-card-title">Rose Architecture &amp; Construction</div>
+        </div>
+      </article>
+
+      <article class="work-card reveal reveal-delay-1" data-category="logo">
+        <div class="work-card-inner">
+          <img class="work-card-img" src="greenhill.jpg" alt="Greenhill logo" loading="lazy" width="800" height="450">
+          <div class="work-card-overlay">
+            <div class="work-card-cat">Logo Design</div>
+            <div class="work-card-title">Greenhill</div>
+          </div>
+        </div>
+        <div class="work-card-body">
+          <div class="work-card-cat">Logo Design</div>
+          <div class="work-card-title">Greenhill</div>
+        </div>
+      </article>
+
+      <article class="work-card reveal" data-category="logo">
+        <div class="work-card-inner">
+          <img class="work-card-img" src="elegant.jpg" alt="Elegant logo" loading="lazy" width="800" height="450">
+          <div class="work-card-overlay">
+            <div class="work-card-cat">Logo Design</div>
+            <div class="work-card-title">Elegant</div>
+          </div>
+        </div>
+        <div class="work-card-body">
+          <div class="work-card-cat">Logo Design</div>
+          <div class="work-card-title">Elegant</div>
+        </div>
+      </article>
+
+      <article class="work-card reveal reveal-delay-1" data-category="logo brand">
+        <div class="work-card-inner">
+          <img class="work-card-img" src="mindville.jpg" alt="Mindville logo" loading="lazy" width="800" height="450">
+          <div class="work-card-overlay">
+            <div class="work-card-cat">Logo Design</div>
+            <div class="work-card-title">Mindville</div>
+          </div>
+        </div>
+        <div class="work-card-body">
+          <div class="work-card-cat">Logo Design</div>
+          <div class="work-card-title">Mindville</div>
+        </div>
+      </article>
+
+      <article class="work-card reveal reveal-delay-2" data-category="logo">
+        <div class="work-card-inner">
+          <img class="work-card-img" src="sutari.jpg" alt="Sutari logo" loading="lazy" width="800" height="450">
+          <div class="work-card-overlay">
+            <div class="work-card-cat">Logo Design</div>
+            <div class="work-card-title">Sutari</div>
+          </div>
+        </div>
+        <div class="work-card-body">
+          <div class="work-card-cat">Logo Design</div>
+          <div class="work-card-title">Sutari</div>
+        </div>
+      </article>
+
+      <article class="work-card reveal" data-category="logo brand">
+        <div class="work-card-inner">
+          <img class="work-card-img" src="diamond.jpg" alt="Diamond Fashion Studio logo" loading="lazy" width="800" height="450">
+          <div class="work-card-overlay">
+            <div class="work-card-cat">Logo Design</div>
+            <div class="work-card-title">Diamond Fashion Studio</div>
+          </div>
+        </div>
+        <div class="work-card-body">
+          <div class="work-card-cat">Logo Design</div>
+          <div class="work-card-title">Diamond Fashion Studio</div>
+        </div>
+      </article>
+
+      <article class="work-card reveal reveal-delay-1" data-category="logo">
+        <div class="work-card-inner">
+          <img class="work-card-img" src="alterna.jpg" alt="Alterna Automotive logo" loading="lazy" width="800" height="450">
+          <div class="work-card-overlay">
+            <div class="work-card-cat">Logo Design</div>
+            <div class="work-card-title">Alterna Automotive</div>
+          </div>
+        </div>
+        <div class="work-card-body">
+          <div class="work-card-cat">Logo Design</div>
+          <div class="work-card-title">Alterna Automotive</div>
+        </div>
+      </article>
+
+      <article class="work-card reveal" data-category="logo">
+        <div class="work-card-inner">
+          <img class="work-card-img" src="carcare.jpg" alt="Car Care logo" loading="lazy" width="800" height="450">
+          <div class="work-card-overlay">
+            <div class="work-card-cat">Logo Design</div>
+            <div class="work-card-title">Car Care</div>
+          </div>
+        </div>
+        <div class="work-card-body">
+          <div class="work-card-cat">Logo Design</div>
+          <div class="work-card-title">Car Care</div>
+        </div>
+      </article>
+
+      <article class="work-card reveal reveal-delay-1" data-category="print">
+        <div class="work-card-inner">
+          <img class="work-card-img" src="weddinginvitations.jpg" alt="Wedding invitation suite" loading="lazy" width="800" height="450">
+          <div class="work-card-overlay">
+            <div class="work-card-cat">Print &amp; Stationery</div>
+            <div class="work-card-title">Wedding Invitations</div>
+          </div>
+        </div>
+        <div class="work-card-body">
+          <div class="work-card-cat">Print &amp; Stationery</div>
+          <div class="work-card-title">Wedding Invitations</div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROCESS
+     ============================================================ -->
+<section class="section" id="process">
+  <div class="wrap">
+    <div class="section-label reveal" data-num="03">How I Work</div>
+    <h2 class="section-title reveal">The <em>process</em></h2>
+    <div class="process-grid">
+      <div class="process-item reveal" data-step="01">
+        <div class="process-num">01 — Discovery</div>
+        <h3>Understand the brief</h3>
+        <p>Every project starts with a deep dive into your brand — who you are, who you serve, and what makes you different. No assumptions, only questions.</p>
+      </div>
+      <div class="process-item reveal reveal-delay-1" data-step="02">
+        <div class="process-num">02 — Strategy</div>
+        <h3>Define the direction</h3>
+        <p>Before a single line is drawn, I map out the visual territory — mood, tone, references, and constraints. Strategy prevents wasted revisions.</p>
+      </div>
+      <div class="process-item reveal" data-step="03">
+        <div class="process-num">03 — Design</div>
+        <h3>Craft the mark</h3>
+        <p>I strip every concept down until only the essential remains. Each line earns its place. Restraint is a discipline, not a shortcut.</p>
+      </div>
+      <div class="process-item reveal reveal-delay-1" data-step="04">
+        <div class="process-num">04 — Delivery</div>
+        <h3>Ship the full system</h3>
+        <p>You receive vector files, brand guidelines, color and type specs, and mockups — everything needed to deploy your identity consistently.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="about-layout">
+      <div class="about-visual reveal">
+        <div class="about-portrait-wrap">
+          <div class="about-portrait">K.A.</div>
+          <div class="about-portrait-badge" aria-hidden="true">Available&nbsp;·&nbsp;2026&nbsp;·&nbsp;Worldwide&nbsp;·</div>
+        </div>
+      </div>
+      <div class="about-copy">
+        <div class="section-label reveal" data-num="04">About</div>
+        <p class="about-lead reveal">Good design is good business — I create logos and brand identities that help you attract the right clients.</p>
+        <p class="reveal">Based in Alexandria, Egypt, I work with startups, agencies, consultants, small businesses, and non-profits worldwide. My approach is rooted in minimalism — every mark I design is purposeful, scalable, and built to last.</p>
+        <p class="reveal">Your brand is distinct. Your logo should be too. I work closely with you from brief to final files, making sure the result reflects your vision and speaks clearly to your audience.</p>
+        <div class="skills reveal">
+          <span class="skill-tag">Logo Design</span>
+          <span class="skill-tag">Brand Identity</span>
+          <span class="skill-tag">Brand Guidelines</span>
+          <span class="skill-tag">Stationery Design</span>
+          <span class="skill-tag">Vector Files</span>
+          <span class="skill-tag">3D Mockups</span>
+          <span class="skill-tag">Wedding Invitations</span>
+          <span class="skill-tag">Print Design</span>
+        </div>
+        <div class="edu-card reveal">
+          <div class="mono-label">Education</div>
+          <h4>Faculty of Commerce, Alexandria University</h4>
+          <p>Bachelor's degree — Management Information Systems · 2018–2022</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TESTIMONIALS — international clients with real flag emojis
+     ============================================================ -->
+<section class="section" id="testimonials" style="background:var(--off);">
+  <div class="wrap">
+    <div class="section-label reveal" data-num="05">Client Words</div>
+    <h2 class="section-title reveal">What they <em>say</em></h2>
+    <div class="testimonials-layout">
+
+      <!-- Client 1 — USA -->
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testimonial-quote">"Kerolos delivered a brand identity that felt completely native to our market. Clean, strategic, and memorable — exactly what a startup needs."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="50" fill="#bfdbfe"/>
+              <circle cx="50" cy="38" r="18" fill="#1e40af"/>
+              <path d="M50 62c-20 0-34 13-34 28h68c0-15-14-28-34-28z" fill="#1e40af"/>
+            </svg>
+          </div>
+          <div>
+            <div class="testimonial-name">James R. <span class="testimonial-flag">🇺🇸</span></div>
+            <div class="testimonial-role">Co-founder, SaaS Startup — New York, USA</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Client 2 — Germany -->
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testimonial-quote">"Sehr professionell! The logo system Kerolos created works perfectly across all our print and digital touchpoints. Outstanding quality."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="50" fill="#fde68a"/>
+              <circle cx="50" cy="38" r="18" fill="#92400e"/>
+              <path d="M50 62c-20 0-34 13-34 28h68c0-15-14-28-34-28z" fill="#92400e"/>
+            </svg>
+          </div>
+          <div>
+            <div class="testimonial-name">Lukas M. <span class="testimonial-flag">🇩🇪</span></div>
+            <div class="testimonial-role">Creative Director, Design Agency — Berlin, Germany</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Client 3 — UK -->
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testimonial-quote">"Professional, responsive, and genuinely talented. Our new identity looks brilliant on everything from the shopfront sign to business cards."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="50" fill="#dbeafe"/>
+              <circle cx="50" cy="38" r="18" fill="#1d4ed8"/>
+              <path d="M50 62c-20 0-34 13-34 28h68c0-15-14-28-34-28z" fill="#1d4ed8"/>
+            </svg>
+          </div>
+          <div>
+            <div class="testimonial-name">Sophie T. <span class="testimonial-flag">🇬🇧</span></div>
+            <div class="testimonial-role">Director, Automotive Services — London, UK</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Client 4 — Canada -->
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testimonial-quote">"Exactly what we asked for, and then some. Kerolos added thoughtful details we hadn't even considered. Highly recommend for any brand work."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="50" fill="#fee2e2"/>
+              <circle cx="50" cy="38" r="18" fill="#b91c1c"/>
+              <path d="M50 62c-20 0-34 13-34 28h68c0-15-14-28-34-28z" fill="#b91c1c"/>
+            </svg>
+          </div>
+          <div>
+            <div class="testimonial-name">Nadia K. <span class="testimonial-flag">🇨🇦</span></div>
+            <div class="testimonial-role">Marketing Lead, Fashion Studio — Toronto, Canada</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Client 5 — Australia -->
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testimonial-quote">"The turnaround was incredibly fast without sacrificing quality. Our coffee shop brand now has a real identity — customers notice it immediately."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="50" fill="#d1fae5"/>
+              <circle cx="50" cy="38" r="18" fill="#065f46"/>
+              <path d="M50 62c-20 0-34 13-34 28h68c0-15-14-28-34-28z" fill="#065f46"/>
+            </svg>
+          </div>
+          <div>
+            <div class="testimonial-name">Liam W. <span class="testimonial-flag">🇦🇺</span></div>
+            <div class="testimonial-role">Owner, Specialty Coffee Shop — Melbourne, Australia</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Client 6 — Netherlands -->
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testimonial-quote">"We needed a logo that could work across Europe. Kerolos understood the brief perfectly and delivered a timeless mark that scales beautifully."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="50" fill="#fef3c7"/>
+              <circle cx="50" cy="38" r="18" fill="#b45309"/>
+              <path d="M50 62c-20 0-34 13-34 28h68c0-15-14-28-34-28z" fill="#b45309"/>
+            </svg>
+          </div>
+          <div>
+            <div class="testimonial-name">Emma V. <span class="testimonial-flag">🇳🇱</span></div>
+            <div class="testimonial-role">Brand Manager, Retail Group — Amsterdam, Netherlands</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER / CONTACT
+     ============================================================ -->
+<footer id="contact">
+  <div class="footer-cta">
+    <div class="wrap">
+      <div class="section-label reveal" data-num="06">Get in Touch</div>
+      <h2 class="reveal">Let's build<br>something <em>great</em>.</h2>
+      <a href="https://www.upwork.com/freelancers/~0155c31d90e911681f" target="_blank" rel="noopener" class="btn btn-primary reveal">
+        Hire me on Upwork
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+      </a>
+      <div class="footer-contact-links reveal">
+        <a href="mailto:kerolosadly584@gmail.com">kerolosadly584@gmail.com</a>
+        <a href="https://www.upwork.com/freelancers/~0155c31d90e911681f" target="_blank" rel="noopener">Upwork Profile →</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="wrap">
+      <span class="footer-bottom-copy">© 2026 Kerolos A. All rights reserved.</span>
+      <div class="footer-bottom-links">
         <a href="#work">Work</a>
         <a href="#about">About</a>
-        <a href="https://www.upwork.com/freelancers/~0155c31d90e911681f" target="_blank" rel="noopener">Upwork</a>
+        <a href="#contact">Contact</a>
       </div>
     </div>
   </div>
 </footer>
 
-<script>
-  // Testimonial carousel — auto fade between slides
-  (function(){
-    const slides = document.querySelectorAll('.t-slide');
-    const dotsWrap = document.getElementById('tDots');
-    if (!slides.length || !dotsWrap) return;
-
-    let current = 0;
-    let timer = null;
-    const intervalMs = 4500;
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    slides.forEach((s, i) => {
-      const dot = document.createElement('button');
-      dot.setAttribute('aria-label', 'Show testimonial ' + (i + 1));
-      if (i === 0) dot.classList.add('active');
-      dot.addEventListener('click', () => goTo(i));
-      dotsWrap.appendChild(dot);
-    });
-    const dots = dotsWrap.querySelectorAll('button');
-
-    function show(i){
-      slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
-      dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
-      current = i;
-    }
-
-    function next(){
-      show((current + 1) % slides.length);
-    }
-
-    function goTo(i){
-      show(i);
-      restart();
-    }
-
-    function restart(){
-      if (timer) clearInterval(timer);
-      if (!reduceMotion) timer = setInterval(next, intervalMs);
-    }
-
-    show(0);
-    restart();
-  })();
-
-  /* ---- page-turn sound (synthesized, no audio file needed) ----
-     Three layered noise bursts mimic a real paper page turn:
-     1) a quick "snap" as the page separates
-     2) a fluttering rustle as it arcs through the air, slowing as it goes
-     3) a soft settle as it lands flat                                    */
-  function playPageTurn(){
-    try{
-      const Ctx = window.AudioContext || window.webkitAudioContext;
-      const ctx = new Ctx();
-      const now = ctx.currentTime;
-
-      // 1) snap — the crisp instant the page lifts off
-      const snapDur = 0.045;
-      const snapSize = Math.floor(ctx.sampleRate * snapDur);
-      const snapBuffer = ctx.createBuffer(1, snapSize, ctx.sampleRate);
-      const snapData = snapBuffer.getChannelData(0);
-      for (let i = 0; i < snapSize; i++){
-        snapData[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / snapSize, 2.2);
-      }
-      const snapSrc = ctx.createBufferSource();
-      snapSrc.buffer = snapBuffer;
-      const snapFilter = ctx.createBiquadFilter();
-      snapFilter.type = 'highpass';
-      snapFilter.frequency.value = 2600;
-      const snapGain = ctx.createGain();
-      snapGain.gain.setValueAtTime(0.32, now);
-      snapGain.gain.exponentialRampToValueAtTime(0.0001, now + snapDur);
-      snapSrc.connect(snapFilter).connect(snapGain).connect(ctx.destination);
-      snapSrc.start(now);
-      snapSrc.stop(now + snapDur + 0.02);
-
-      // 2) flutter — the rustle of the page arcing through the air,
-      //    amplitude-modulated so it audibly "flaps" and slows as it settles
-      const flutterStart = 0.02;
-      const flutterDur = 0.34;
-      const flutterSize = Math.floor(ctx.sampleRate * flutterDur);
-      const flutterBuffer = ctx.createBuffer(1, flutterSize, ctx.sampleRate);
-      const flutterData = flutterBuffer.getChannelData(0);
-      for (let i = 0; i < flutterSize; i++){
-        const t = i / ctx.sampleRate;
-        const progress = i / flutterSize;
-        const flutterFreq = 26 - 16 * progress;
-        const flutterMod = 0.55 + 0.45 * Math.sin(2 * Math.PI * flutterFreq * t);
-        const env = Math.pow(1 - progress, 1.3);
-        flutterData[i] = (Math.random() * 2 - 1) * flutterMod * env;
-      }
-      const flutterSrc = ctx.createBufferSource();
-      flutterSrc.buffer = flutterBuffer;
-      const flutterFilter = ctx.createBiquadFilter();
-      flutterFilter.type = 'bandpass';
-      flutterFilter.Q.value = 0.9;
-      flutterFilter.frequency.setValueAtTime(3200, now + flutterStart);
-      flutterFilter.frequency.exponentialRampToValueAtTime(1500, now + flutterStart + flutterDur);
-      const flutterGain = ctx.createGain();
-      flutterGain.gain.setValueAtTime(0.0001, now + flutterStart);
-      flutterGain.gain.exponentialRampToValueAtTime(0.26, now + flutterStart + 0.03);
-      flutterGain.gain.exponentialRampToValueAtTime(0.0001, now + flutterStart + flutterDur);
-      flutterSrc.connect(flutterFilter).connect(flutterGain).connect(ctx.destination);
-      flutterSrc.start(now + flutterStart);
-      flutterSrc.stop(now + flutterStart + flutterDur + 0.02);
-
-      // 3) settle — a soft, low thump as the page lands flat on the stack
-      const settleStart = flutterStart + flutterDur - 0.03;
-      const settleDur = 0.06;
-      const settleSize = Math.floor(ctx.sampleRate * settleDur);
-      const settleBuffer = ctx.createBuffer(1, settleSize, ctx.sampleRate);
-      const settleData = settleBuffer.getChannelData(0);
-      for (let i = 0; i < settleSize; i++){
-        settleData[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / settleSize, 1.8);
-      }
-      const settleSrc = ctx.createBufferSource();
-      settleSrc.buffer = settleBuffer;
-      const settleFilter = ctx.createBiquadFilter();
-      settleFilter.type = 'lowpass';
-      settleFilter.frequency.value = 900;
-      const settleGain = ctx.createGain();
-      settleGain.gain.setValueAtTime(0.1, now + settleStart);
-      settleGain.gain.exponentialRampToValueAtTime(0.0001, now + settleStart + settleDur);
-      settleSrc.connect(settleFilter).connect(settleGain).connect(ctx.destination);
-      settleSrc.start(now + settleStart);
-      settleSrc.stop(now + settleStart + settleDur + 0.02);
-
-      setTimeout(() => ctx.close(), (flutterStart + flutterDur + 0.3) * 1000);
-    }catch(e){ /* audio not available — fail silently */ }
-  }
-
-  // Work slideshow — autoplay with arrows + dots
-  (function(){
-    const viewport = document.getElementById('folioViewport');
-    const slides = document.querySelectorAll('.folio-slide');
-    const dotsWrap = document.getElementById('fsDots');
-    const prevBtn = document.getElementById('fsPrev');
-    const nextBtn = document.getElementById('fsNext');
-    if (!slides.length || !dotsWrap) return;
-
-    let current = 0;
-    let timer = null;
-    const intervalMs = 3800;
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    slides.forEach((s, i) => {
-      const dot = document.createElement('button');
-      dot.setAttribute('aria-label', 'Show project ' + (i + 1));
-      if (i === 0) dot.classList.add('active');
-      dot.addEventListener('click', () => goTo(i));
-      dotsWrap.appendChild(dot);
-    });
-    const dots = dotsWrap.querySelectorAll('button');
-
-    function show(i){
-      slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
-      dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
-      current = i;
-    }
-
-    function next(){ if (!reduceMotion) playPageTurn(); show((current + 1) % slides.length); }
-    function prev(){ if (!reduceMotion) playPageTurn(); show((current - 1 + slides.length) % slides.length); }
-
-    function goTo(i){
-      if (!reduceMotion && i !== current) playPageTurn();
-      show(i);
-      restart();
-    }
-
-    function restart(){
-      if (timer) clearInterval(timer);
-      if (!reduceMotion) timer = setInterval(next, intervalMs);
-    }
-
-    if (prevBtn) prevBtn.addEventListener('click', () => { prev(); restart(); });
-    if (nextBtn) nextBtn.addEventListener('click', () => { next(); restart(); });
-
-    if (viewport){
-      viewport.addEventListener('mouseenter', () => { if (timer) clearInterval(timer); });
-      viewport.addEventListener('mouseleave', restart);
-    }
-
-    show(0);
-    restart();
-  })();
-
-  // Header shadow on scroll
-  const header = document.getElementById('siteHeader');
-  window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 8);
-  });
-
-  // Scroll reveal for folio cards and approach items
-  const revealEls = document.querySelectorAll('.approach-item');
-  if ('IntersectionObserver' in window){
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting){
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-    revealEls.forEach(el => io.observe(el));
-  } else {
-    revealEls.forEach(el => el.classList.add('in'));
-  }
-
-  // Smooth-scroll for in-page nav
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', (e) => {
-      const id = a.getAttribute('href');
-      if (id.length > 1){
-        const target = document.querySelector(id);
-        if (target){
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }
-    });
-  });
-</script>
-
-<!-- ---------- CHATBOT WIDGET ---------- -->
+<!-- ============================================================
+     CHATBOT TOGGLE
+     ============================================================ -->
 <button class="cb-toggle cb-unseen" id="cbToggle" aria-label="Open chat">
   <span class="cb-dot"></span>
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -1172,384 +1412,537 @@
   </svg>
 </button>
 
-<div class="cb-panel" id="cbPanel" role="dialog" aria-label="Chat with Kerolos A.">
+<div class="cb-panel" id="cbPanel" role="dialog" aria-label="Chat with Kerolos A." aria-modal="true">
   <div class="cb-header">
     <div class="cb-header-info">
       <div class="cb-avatar">K</div>
       <div class="cb-header-text">
         <strong>Kerolos A.</strong>
-        <span>Usually replies within a day</span>
+        <span>Brand Identity Designer</span>
       </div>
     </div>
     <div class="cb-header-actions">
       <button class="cb-restart" id="cbRestart" aria-label="Restart chat" title="Start over">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
       </button>
       <button class="cb-close" id="cbClose" aria-label="Close chat">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
   </div>
   <div class="cb-messages" id="cbMessages"></div>
 </div>
 
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
 <script>
-(function(){
-  const EMAIL = "kerolosadly584@gmail.com";
-  const FORM_ENDPOINT = "https://formsubmit.co/ajax/" + EMAIL;
+(function () {
+  'use strict';
 
-  const toggle = document.getElementById('cbToggle');
-  const panel = document.getElementById('cbPanel');
-  const closeBtn = document.getElementById('cbClose');
-  const restartBtn = document.getElementById('cbRestart');
-  const messages = document.getElementById('cbMessages');
+  /* ---- Custom cursor ---- */
+  const cursor = document.getElementById('cursor');
+  if (cursor && window.matchMedia('(hover: hover)').matches) {
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top  = e.clientY + 'px';
+    });
+    document.querySelectorAll('a, button, .work-card, .skill-tag').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('grow'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('grow'));
+    });
+  }
 
-  // Collected context as the visitor moves through the conversation —
-  // gets attached to the lead email so replies can be more relevant.
-  let lead = { interest: null, timeline: null, budget: null };
+  /* ---- Header scroll ---- */
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
 
-  /* ---- bell sound (synthesized, no audio file needed) ---- */
-  function playBell(){
-    try{
+  /* ---- Mobile burger ---- */
+  const burger    = document.getElementById('burger');
+  const mobileNav = document.getElementById('mobileNav');
+  burger.addEventListener('click', () => {
+    const open = burger.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    mobileNav.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  document.querySelectorAll('.mobile-link').forEach(a => {
+    a.addEventListener('click', () => {
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+      burger.setAttribute('aria-label', 'Open menu');
+      mobileNav.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  /* ---- Smooth scroll ---- */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  /* ---- Scroll reveal ---- */
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  }
+
+  /* ---- Animated counters ---- */
+  function animateCounter(el, target, duration) {
+    const start = performance.now();
+    const suffix = target === 100 ? '%' : '+';
+    function step(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(eased * target) + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  const statsSection = document.getElementById('stats');
+  let countersRun = false;
+  if ('IntersectionObserver' in window && statsSection) {
+    const statsIO = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && !countersRun) {
+        countersRun = true;
+        document.querySelectorAll('.stat-num[data-target]').forEach(el => {
+          animateCounter(el, parseInt(el.dataset.target, 10), 1800);
+        });
+        statsIO.disconnect();
+      }
+    }, { threshold: 0.4 });
+    statsIO.observe(statsSection);
+  }
+
+  /* ---- Work filter ---- */
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const workCards  = document.querySelectorAll('.work-card');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      workCards.forEach(card => {
+        const cats = card.dataset.category || '';
+        card.style.display = (filter === 'all' || cats.includes(filter)) ? '' : 'none';
+      });
+    });
+  });
+
+  /* ============================================================
+     OPENING MUSIC — synthesized ambient chord
+     ============================================================ */
+  function playOpeningMusic() {
+    try {
+      const Ctx = window.AudioContext || window.webkitAudioContext;
+      const ctx = new Ctx();
+      const master = ctx.createGain();
+      master.gain.setValueAtTime(0, ctx.currentTime);
+      master.gain.linearRampToValueAtTime(0.18, ctx.currentTime + 1.2);
+      master.gain.linearRampToValueAtTime(0, ctx.currentTime + 5.5);
+      master.connect(ctx.destination);
+
+      // Soft ambient pad — major 7th chord (C, E, G, B)
+      const freqs = [261.63, 329.63, 392.00, 493.88, 523.25];
+      freqs.forEach((freq, i) => {
+        const osc  = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const filter = ctx.createBiquadFilter();
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        filter.type = 'lowpass';
+        filter.frequency.value = 1800;
+        gain.gain.setValueAtTime(0, ctx.currentTime + i * 0.12);
+        gain.gain.linearRampToValueAtTime(0.22, ctx.currentTime + i * 0.12 + 0.6);
+        gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 5.2);
+        osc.connect(filter).connect(gain).connect(master);
+        osc.start(ctx.currentTime + i * 0.12);
+        osc.stop(ctx.currentTime + 6);
+      });
+
+      // Subtle high shimmer
+      const shimmer = ctx.createOscillator();
+      const shimGain = ctx.createGain();
+      shimmer.type = 'sine';
+      shimmer.frequency.value = 1046.5;
+      shimGain.gain.setValueAtTime(0, ctx.currentTime + 0.8);
+      shimGain.gain.linearRampToValueAtTime(0.04, ctx.currentTime + 1.6);
+      shimGain.gain.linearRampToValueAtTime(0, ctx.currentTime + 4.5);
+      shimmer.connect(shimGain).connect(master);
+      shimmer.start(ctx.currentTime + 0.8);
+      shimmer.stop(ctx.currentTime + 5);
+
+      setTimeout(() => ctx.close(), 7000);
+    } catch(e) { /* audio not available */ }
+  }
+
+  /* ---- Play opening music once on first user interaction ---- */
+  let musicPlayed = false;
+  function tryPlayMusic() {
+    if (!musicPlayed) {
+      musicPlayed = true;
+      playOpeningMusic();
+      document.removeEventListener('click', tryPlayMusic);
+      document.removeEventListener('keydown', tryPlayMusic);
+      document.removeEventListener('touchstart', tryPlayMusic);
+    }
+  }
+  document.addEventListener('click', tryPlayMusic, { once: true });
+  document.addEventListener('keydown', tryPlayMusic, { once: true });
+  document.addEventListener('touchstart', tryPlayMusic, { once: true, passive: true });
+
+  /* ============================================================
+     PAGE-TURN SOUND
+     ============================================================ */
+  function playPageTurn() {
+    try {
       const Ctx = window.AudioContext || window.webkitAudioContext;
       const ctx = new Ctx();
       const now = ctx.currentTime;
-      function tone(freq, start, dur, gainPeak){
+      const snapSize = Math.floor(ctx.sampleRate * 0.045);
+      const snapBuf  = ctx.createBuffer(1, snapSize, ctx.sampleRate);
+      const snapData = snapBuf.getChannelData(0);
+      for (let i = 0; i < snapSize; i++) snapData[i] = (Math.random()*2-1) * Math.pow(1-i/snapSize, 2.2);
+      const snapSrc = ctx.createBufferSource(); snapSrc.buffer = snapBuf;
+      const snapF = ctx.createBiquadFilter(); snapF.type = 'highpass'; snapF.frequency.value = 2600;
+      const snapG = ctx.createGain(); snapG.gain.setValueAtTime(0.28, now); snapG.gain.exponentialRampToValueAtTime(0.0001, now+0.045);
+      snapSrc.connect(snapF).connect(snapG).connect(ctx.destination);
+      snapSrc.start(now); snapSrc.stop(now+0.07);
+      setTimeout(() => ctx.close(), 500);
+    } catch(e) {}
+  }
+
+  /* ============================================================
+     BELL SOUND
+     ============================================================ */
+  function playBell() {
+    try {
+      const Ctx = window.AudioContext || window.webkitAudioContext;
+      const ctx = new Ctx();
+      const now = ctx.currentTime;
+      [[1318.5, 0, 0.9, 0.16], [987.8, 0.14, 1.1, 0.12]].forEach(([freq, start, dur, peak]) => {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.value = freq;
-        gain.gain.setValueAtTime(0.0001, now + start);
-        gain.gain.exponentialRampToValueAtTime(gainPeak, now + start + 0.015);
-        gain.gain.exponentialRampToValueAtTime(0.0001, now + start + dur);
+        osc.type = 'sine'; osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.0001, now+start);
+        gain.gain.exponentialRampToValueAtTime(peak, now+start+0.015);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now+start+dur);
         osc.connect(gain).connect(ctx.destination);
-        osc.start(now + start);
-        osc.stop(now + start + dur + 0.05);
-      }
-      tone(1318.5, 0, 0.9, 0.18);
-      tone(987.8, 0.16, 1.1, 0.14);
+        osc.start(now+start); osc.stop(now+start+dur+0.05);
+      });
       setTimeout(() => ctx.close(), 1500);
-    }catch(e){ /* audio not available — fail silently */ }
+    } catch(e) {}
   }
 
-  function scrollToBottom(){
-    messages.scrollTop = messages.scrollHeight;
-  }
+  /* ============================================================
+     CHATBOT
+     ============================================================ */
+  const EMAIL         = "kerolosadly584@gmail.com";
+  const FORM_ENDPOINT = "https://formsubmit.co/ajax/" + EMAIL;
 
-  function addBotBubble(html){
-    const row = document.createElement('div');
-    row.className = 'cb-row bot';
-    const bubble = document.createElement('div');
-    bubble.className = 'cb-bubble';
-    bubble.innerHTML = html;
-    row.appendChild(bubble);
-    messages.appendChild(row);
-    scrollToBottom();
-    return bubble;
-  }
+  const cbToggle   = document.getElementById('cbToggle');
+  const cbPanel    = document.getElementById('cbPanel');
+  const cbClose    = document.getElementById('cbClose');
+  const cbRestart  = document.getElementById('cbRestart');
+  const cbMessages = document.getElementById('cbMessages');
 
-  function addUserBubble(text){
-    const row = document.createElement('div');
-    row.className = 'cb-row user';
-    const bubble = document.createElement('div');
-    bubble.className = 'cb-bubble';
-    bubble.textContent = text;
-    row.appendChild(bubble);
-    messages.appendChild(row);
-    scrollToBottom();
-  }
+  let lead = { interest: null, timeline: null, budget: null };
+  let openedAt = null;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function showTyping(cb, delay){
-    const typing = document.createElement('div');
-    typing.className = 'cb-typing';
-    typing.innerHTML = '<span></span><span></span><span></span>';
-    messages.appendChild(typing);
-    scrollToBottom();
-    setTimeout(() => {
-      typing.remove();
-      cb();
-    }, delay || 550);
-  }
+  function scrollBottom() { cbMessages.scrollTop = cbMessages.scrollHeight; }
 
-  function clearOptions(){
-    document.querySelectorAll('.cb-options, .cb-form').forEach(el => el.remove());
-  }
-
-  function disableOptions(wrap){
-    wrap.querySelectorAll('button').forEach(b => b.disabled = true);
-  }
-
-  // Renders a set of quick-reply buttons.
-  // choices: [{ label, say (echoed as the user's bubble), next (fn) }]
-  function renderChoices(choices){
-    clearOptions();
-    const wrap = document.createElement('div');
-    wrap.className = 'cb-options';
-    choices.forEach(choice => {
-      const btn = document.createElement('button');
-      btn.className = 'cb-opt-btn';
-      btn.innerHTML = choice.label;
-      btn.addEventListener('click', () => {
-        disableOptions(wrap);
-        addUserBubble(choice.say);
-        showTyping(choice.next);
-      });
-      wrap.appendChild(btn);
-    });
-    messages.appendChild(wrap);
-    scrollToBottom();
-  }
-
-  /* ================= CONVERSATION TREE ================= */
-
-  function startConversation(){
-    addBotBubble('👋 Welcome to Kerolos A. — Logo &amp; Brand Identity Design! I can help you find the right service in about 30 seconds.');
-    showTyping(showMainMenu, 500);
-  }
-
-  function showMainMenu(){
-    addBotBubble('What brings you here today?');
-    renderChoices([
-      {
-        label: '🎨 Explore our services',
-        say: 'I want to see what services you offer.',
-        next: showServicesMenu
-      },
-      {
-        label: '💌 Wedding invitations <span class="cb-badge">Popular</span>',
-        say: 'I need wedding invitation design.',
-        next: showWeddingFlow
-      },
-      {
-        label: '💬 Get a free quote',
-        say: 'I\'d like a quote for my project.',
-        next: showQuoteStep1
-      },
-      {
-        label: '📝 Just register my info',
-        say: 'I\'ll just leave my details.',
-        next: showRegisterForm
-      }
-    ]);
-  }
-
-  function showServicesMenu(){
-    addBotBubble(
-      'Here\'s what I can create for you:' +
-      '<ul>' +
-      '<li><strong>Logo Design</strong> — a mark that\'s distinctly yours</li>' +
-      '<li><strong>Brand Identity &amp; Guidelines</strong> — a consistent look everywhere</li>' +
-      '<li><strong>Wedding &amp; Greeting Card Invitations</strong> — elegant, print-ready designs</li>' +
-      '<li><strong>Stationery Design</strong> — business cards, letterheads &amp; more</li>' +
-      '<li><strong>Vector &amp; Printable Files</strong> — sharp at any size</li>' +
-      '<li><strong>3D Mockups</strong> — see your brand before it\'s printed</li>' +
-      '</ul>'
-    );
-    showTyping(() => {
-      addBotBubble('Is there one of these you\'d love to talk about, or should I put together a quick quote?');
-      renderChoices([
-        { label: '💌 Tell me about wedding invitations', say: 'Tell me more about wedding invitations.', next: showWeddingFlow },
-        { label: '🏷️ Tell me about logo &amp; branding', say: 'Tell me more about logo & branding.', next: () => showBrandingPitch() },
-        { label: '💬 Get a free quote', say: 'I\'d like a quote.', next: showQuoteStep1 },
-        { label: '📝 Register my info', say: 'I\'ll register my info now.', next: showRegisterForm }
-      ]);
-    }, 550);
-  }
-
-  function showBrandingPitch(){
-    lead.interest = 'Logo & Brand Identity';
-    addBotBubble('Great choice — a strong identity is often the difference between "just another business" and one people remember. Every branding project includes your logo, color &amp; type system, guidelines, and print-ready + vector files.');
-    showTyping(() => {
-      addBotBubble('Want me to put together a free quote, or go ahead and register your info?');
-      renderChoices([
-        { label: '💬 Get a free quote', say: 'Let\'s do a quote.', next: showQuoteStep1 },
-        { label: '📝 Register my info', say: 'I\'ll register now.', next: showRegisterForm },
-        { label: '⬅ Back to menu', say: 'Take me back to the menu.', next: showMainMenu }
-      ]);
-    }, 550);
-  }
-
-  function showWeddingFlow(){
-    lead.interest = 'Wedding Invitations';
-    addBotBubble('💌 Wedding invitations are one of my favorite projects — a beautifully designed suite (invite, RSVP card, and details card) sets the tone for the whole celebration before a single guest arrives. Every set is delivered print-ready and fully customizable.');
-    showTyping(() => {
-      addBotBubble('When\'s the big day?');
-      renderChoices([
-        { label: '💍 Within 2 months', say: 'Within 2 months.', next: () => { lead.timeline = 'Within 2 months'; showWeddingFollowUp(); } },
-        { label: '📅 Later this year', say: 'Later this year.', next: () => { lead.timeline = 'Later this year'; showWeddingFollowUp(); } },
-        { label: '👀 Just exploring ideas', say: 'Just exploring ideas for now.', next: () => { lead.timeline = 'Just exploring'; showWeddingFollowUp(); } }
-      ]);
-    }, 600);
-  }
-
-  function showWeddingFollowUp(){
-    const urgent = lead.timeline === 'Within 2 months';
-    addBotBubble(
-      urgent
-        ? 'Perfect timing — invitation suites usually take 5–7 days to design, so there\'s plenty of room to get everything ready and printed. Want me to lock in your details now?'
-        : 'Lovely — I\'m happy to start sketching ideas whenever you\'re ready. Want to leave your info now so I can send some inspiration and pricing?'
-    );
-    showTyping(() => {
-      renderChoices([
-        { label: '📝 Yes, register my info', say: 'Yes, let\'s register.', next: showRegisterForm },
-        { label: '🎨 See other services first', say: 'Show me the other services first.', next: showServicesMenu },
-        { label: '⬅ Back to menu', say: 'Take me back to the menu.', next: showMainMenu }
-      ]);
-    }, 500);
-  }
-
-  function showQuoteStep1(){
-    addBotBubble('Happy to help — a couple of quick questions and I\'ll have a clearer picture. What are you looking for?');
-    showTyping(() => {
-      renderChoices([
-        { label: '🏷️ Logo &amp; brand identity', say: 'Logo & brand identity.', next: () => { lead.interest = 'Logo & Brand Identity'; showQuoteStep2(); } },
-        { label: '💌 Wedding invitations', say: 'Wedding invitations.', next: () => { lead.interest = 'Wedding Invitations'; showQuoteStep2(); } },
-        { label: '🖋️ Stationery &amp; print', say: 'Stationery & print design.', next: () => { lead.interest = 'Stationery & Print'; showQuoteStep2(); } },
-        { label: '🤔 Something else', say: 'Something else.', next: () => { lead.interest = 'Other'; showQuoteStep2(); } }
-      ]);
-    }, 500);
-  }
-
-  function showQuoteStep2(){
-    addBotBubble('Got it. And what\'s your timeline?');
-    showTyping(() => {
-      renderChoices([
-        { label: '🔥 ASAP', say: 'ASAP.', next: () => { lead.timeline = 'ASAP'; showQuoteResult(); } },
-        { label: '🗓️ Within a month', say: 'Within a month.', next: () => { lead.timeline = 'Within a month'; showQuoteResult(); } },
-        { label: '🔎 Just researching', say: 'Just researching for now.', next: () => { lead.timeline = 'Just researching'; showQuoteResult(); } }
-      ]);
-    }, 450);
-  }
-
-  function showQuoteResult(){
-    addBotBubble(
-      'Thanks — that\'s really helpful. For <strong>' + escapeHtml(lead.interest) + '</strong> with a timeline of <strong>' + escapeHtml(lead.timeline) + '</strong>, ' +
-      'I\'ll put together exact pricing once I know a bit more about your project. Let\'s get your details so I can send that over.'
-    );
-    showTyping(() => {
-      renderChoices([
-        { label: '📝 Register my info', say: 'Let\'s register my info.', next: showRegisterForm },
-        { label: '⬅ Back to menu', say: 'Take me back to the menu.', next: showMainMenu }
-      ]);
-    }, 500);
-  }
-
-  function showRegisterForm(){
-    clearOptions();
-    addBotBubble('Great — just your name and WhatsApp number, and I\'ll be in touch' + (lead.interest ? ' about ' + escapeHtml(lead.interest.toLowerCase()) : '') + '.');
-
-    const form = document.createElement('div');
-    form.className = 'cb-form';
-    form.innerHTML =
-      '<input type="text" id="cbName" placeholder="Your name" autocomplete="name">' +
-      '<input type="tel" id="cbPhone" placeholder="WhatsApp number (e.g. +20 1xx xxx xxxx)" autocomplete="tel">' +
-      '<span class="cb-form-err" id="cbErr">Please fill in both fields.</span>' +
-      '<button class="cb-submit" id="cbSubmit">Send</button>';
-    messages.appendChild(form);
-    scrollToBottom();
-
-    const nameInput = form.querySelector('#cbName');
-    const phoneInput = form.querySelector('#cbPhone');
-    const errEl = form.querySelector('#cbErr');
-    const submitBtn = form.querySelector('#cbSubmit');
-
-    submitBtn.addEventListener('click', () => {
-      const name = nameInput.value.trim();
-      const phone = phoneInput.value.trim();
-
-      if (!name || !phone){
-        errEl.style.display = 'block';
-        return;
-      }
-      errEl.style.display = 'none';
-      nameInput.disabled = true;
-      phoneInput.disabled = true;
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
-
-      addUserBubble(name + ' — ' + phone);
-
-      fetch(FORM_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          _subject: 'New chatbot lead — website',
-          Name: name,
-          WhatsApp: phone,
-          Interest: lead.interest || 'Not specified',
-          Timeline: lead.timeline || 'Not specified',
-          Page: window.location.href,
-          Time: new Date().toString()
-        })
-      })
-      .then(res => res.json())
-      .then(() => {
-        form.remove();
-        showTyping(() => {
-          addBotBubble('Thanks, ' + escapeHtml(name) + '! Your info has been sent — I\'ll reach out on WhatsApp soon. 🎉');
-          showTyping(() => {
-            renderChoices([
-              { label: '💌 Ask about wedding invitations', say: 'Tell me about wedding invitations too.', next: showWeddingFlow },
-              { label: '🎨 See other services', say: 'Show me other services.', next: showServicesMenu },
-              { label: '✅ That\'s all, thanks', say: 'That\'s all, thanks!', next: () => addBotBubble('Wonderful — talk soon! 🙌') }
-            ]);
-          }, 500);
-        });
-      })
-      .catch(() => {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Send';
-        nameInput.disabled = false;
-        phoneInput.disabled = false;
-        showTyping(() => {
-          addBotBubble('Hmm, something went wrong sending that. You can also reach me directly at <a href="mailto:' + EMAIL + '">' + EMAIL + '</a>.');
-        });
-      });
-    });
-  }
-
-  function escapeHtml(str){
+  function escapeHtml(str) {
     const d = document.createElement('div');
     d.textContent = str;
     return d.innerHTML;
   }
 
-  /* ================= OPEN / CLOSE / RESTART ================= */
+  function addBot(html) {
+    const row = document.createElement('div'); row.className = 'cb-row bot';
+    const bub = document.createElement('div'); bub.className = 'cb-bubble';
+    bub.innerHTML = html;
+    row.appendChild(bub); cbMessages.appendChild(row); scrollBottom();
+  }
 
-  function resetConversation(){
+  function addUser(text) {
+    const row = document.createElement('div'); row.className = 'cb-row user';
+    const bub = document.createElement('div'); bub.className = 'cb-bubble';
+    bub.textContent = text;
+    row.appendChild(bub); cbMessages.appendChild(row); scrollBottom();
+  }
+
+  function typing(cb, delay) {
+    const t = document.createElement('div'); t.className = 'cb-typing';
+    t.innerHTML = '<span></span><span></span><span></span>';
+    cbMessages.appendChild(t); scrollBottom();
+    setTimeout(() => { t.remove(); cb(); }, delay || 520);
+  }
+
+  function clearOpts() {
+    cbMessages.querySelectorAll('.cb-options, .cb-form').forEach(el => el.remove());
+  }
+
+  function choices(list) {
+    clearOpts();
+    const wrap = document.createElement('div'); wrap.className = 'cb-options';
+    list.forEach(c => {
+      const btn = document.createElement('button'); btn.className = 'cb-opt-btn';
+      btn.innerHTML = c.label;
+      btn.addEventListener('click', () => {
+        wrap.querySelectorAll('button').forEach(b => b.disabled = true);
+        addUser(c.say);
+        if (!reduceMotion) playPageTurn();
+        typing(c.next);
+      });
+      wrap.appendChild(btn);
+    });
+    cbMessages.appendChild(wrap); scrollBottom();
+  }
+
+  /* ---- Conversation tree ---- */
+  function startConvo() {
+    addBot('👋 Hi there! I\'m Kerolos\' assistant. I can help you find the right service in about 30 seconds.');
+    typing(mainMenu, 500);
+  }
+
+  function mainMenu() {
+    addBot('What brings you here today?');
+    choices([
+      { label: '🎨 Explore services', say: 'I want to see your services.', next: servicesMenu },
+      { label: '💌 Wedding invitations <span class="cb-badge">Popular</span>', say: 'I need wedding invitation design.', next: weddingFlow },
+      { label: '💬 Get a free quote', say: 'I\'d like a quote.', next: quoteStep1 },
+      { label: '📝 Leave my details', say: 'I\'ll leave my details.', next: registerForm }
+    ]);
+  }
+
+  function servicesMenu() {
+    addBot(
+      'Here\'s what Kerolos can create for you:' +
+      '<ul>' +
+      '<li><strong>Logo Design</strong> — a mark that\'s distinctly yours</li>' +
+      '<li><strong>Brand Identity &amp; Guidelines</strong> — consistent look everywhere</li>' +
+      '<li><strong>Wedding &amp; Greeting Card Invitations</strong> — elegant, print-ready</li>' +
+      '<li><strong>Stationery Design</strong> — business cards, letterheads &amp; more</li>' +
+      '<li><strong>Vector &amp; Printable Files</strong> — sharp at any size</li>' +
+      '<li><strong>3D Mockups</strong> — see your brand before it\'s printed</li>' +
+      '</ul>'
+    );
+    typing(() => {
+      addBot('Which one interests you most?');
+      choices([
+        { label: '💌 Wedding invitations', say: 'Tell me about wedding invitations.', next: weddingFlow },
+        { label: '🏷️ Logo &amp; branding', say: 'Tell me about logo & branding.', next: brandingPitch },
+        { label: '💬 Get a quote', say: 'I\'d like a quote.', next: quoteStep1 },
+        { label: '📝 Register my info', say: 'I\'ll register now.', next: registerForm }
+      ]);
+    }, 550);
+  }
+
+  function brandingPitch() {
+    lead.interest = 'Logo & Brand Identity';
+    addBot('A strong identity is often the difference between "just another business" and one people remember. Every project includes logo, color &amp; type system, guidelines, and print-ready + vector files.');
+    typing(() => {
+      choices([
+        { label: '💬 Get a quote', say: 'Let\'s do a quote.', next: quoteStep1 },
+        { label: '📝 Register my info', say: 'I\'ll register now.', next: registerForm },
+        { label: '⬅ Back to menu', say: 'Back to menu.', next: mainMenu }
+      ]);
+    }, 550);
+  }
+
+  function weddingFlow() {
+    lead.interest = 'Wedding Invitations';
+    addBot('💌 A beautifully designed suite — invite, RSVP card, and details card — sets the tone for the whole celebration. Every set is delivered print-ready and fully customizable.');
+    typing(() => {
+      addBot('When\'s the big day?');
+      choices([
+        { label: '💍 Within 2 months', say: 'Within 2 months.', next: () => { lead.timeline = 'Within 2 months'; weddingFollowUp(); } },
+        { label: '📅 Later this year', say: 'Later this year.', next: () => { lead.timeline = 'Later this year'; weddingFollowUp(); } },
+        { label: '👀 Just exploring', say: 'Just exploring ideas.', next: () => { lead.timeline = 'Just exploring'; weddingFollowUp(); } }
+      ]);
+    }, 600);
+  }
+
+  function weddingFollowUp() {
+    const urgent = lead.timeline === 'Within 2 months';
+    addBot(urgent
+      ? 'Perfect timing — suites usually take 5–7 days to design, so there\'s plenty of room. Want to lock in your details now?'
+      : 'Lovely — happy to start sketching ideas whenever you\'re ready. Want to leave your info so Kerolos can send inspiration and pricing?'
+    );
+    typing(() => {
+      choices([
+        { label: '📝 Yes, register my info', say: 'Yes, let\'s register.', next: registerForm },
+        { label: '🎨 See other services', say: 'Show me other services.', next: servicesMenu },
+        { label: '⬅ Back to menu', say: 'Back to menu.', next: mainMenu }
+      ]);
+    }, 500);
+  }
+
+  function quoteStep1() {
+    addBot('A couple of quick questions. What are you looking for?');
+    typing(() => {
+      choices([
+        { label: '🏷️ Logo &amp; brand identity', say: 'Logo & brand identity.', next: () => { lead.interest = 'Logo & Brand Identity'; quoteStep2(); } },
+        { label: '💌 Wedding invitations', say: 'Wedding invitations.', next: () => { lead.interest = 'Wedding Invitations'; quoteStep2(); } },
+        { label: '🖋️ Stationery &amp; print', say: 'Stationery & print.', next: () => { lead.interest = 'Stationery & Print'; quoteStep2(); } },
+        { label: '🤔 Something else', say: 'Something else.', next: () => { lead.interest = 'Other'; quoteStep2(); } }
+      ]);
+    }, 500);
+  }
+
+  function quoteStep2() {
+    addBot('Got it. What\'s your budget range?');
+    typing(() => {
+      choices([
+        { label: '💵 Under $100', say: 'Under $100.', next: () => { lead.budget = 'Under $100'; quoteStep3(); } },
+        { label: '💵 $100 – $300', say: '$100–$300.', next: () => { lead.budget = '$100–$300'; quoteStep3(); } },
+        { label: '💵 $300 – $600', say: '$300–$600.', next: () => { lead.budget = '$300–$600'; quoteStep3(); } },
+        { label: '💵 $600+', say: '$600+.', next: () => { lead.budget = '$600+'; quoteStep3(); } }
+      ]);
+    }, 450);
+  }
+
+  function quoteStep3() {
+    addBot('And your timeline?');
+    typing(() => {
+      choices([
+        { label: '🔥 ASAP', say: 'ASAP.', next: () => { lead.timeline = 'ASAP'; quoteResult(); } },
+        { label: '🗓️ Within a month', say: 'Within a month.', next: () => { lead.timeline = 'Within a month'; quoteResult(); } },
+        { label: '🔎 Just researching', say: 'Just researching.', next: () => { lead.timeline = 'Just researching'; quoteResult(); } }
+      ]);
+    }, 450);
+  }
+
+  function quoteResult() {
+    addBot(
+      'Thanks — that\'s really helpful! For <strong>' + escapeHtml(lead.interest) + '</strong>, ' +
+      'budget <strong>' + escapeHtml(lead.budget) + '</strong>, timeline <strong>' + escapeHtml(lead.timeline) + '</strong> — ' +
+      'Kerolos will send you a detailed quote once he has your contact details.'
+    );
+    typing(() => {
+      choices([
+        { label: '📝 Register my info', say: 'Let\'s register.', next: registerForm },
+        { label: '⬅ Back to menu', say: 'Back to menu.', next: mainMenu }
+      ]);
+    }, 500);
+  }
+
+  function registerForm() {
+    clearOpts();
+    addBot('Great — just your name and WhatsApp number' + (lead.interest ? ', and I\'ll pass along your interest in <strong>' + escapeHtml(lead.interest) + '</strong>' : '') + '.');
+
+    const form = document.createElement('div'); form.className = 'cb-form';
+    form.innerHTML =
+      '<input type="text"  id="cbName"  placeholder="Your name"  autocomplete="name">' +
+      '<input type="tel"   id="cbPhone" placeholder="WhatsApp (e.g. +1 555 000 0000)" autocomplete="tel">' +
+      '<input type="text"  id="cbHoney" name="_honey" style="display:none" tabindex="-1" autocomplete="off">' +
+      '<span class="cb-form-err" id="cbErr">Please fill in both fields.</span>' +
+      '<button class="cb-submit" id="cbSubmit">Send ✓</button>';
+    cbMessages.appendChild(form); scrollBottom();
+
+    const nameEl  = form.querySelector('#cbName');
+    const phoneEl = form.querySelector('#cbPhone');
+    const honeyEl = form.querySelector('#cbHoney');
+    const errEl   = form.querySelector('#cbErr');
+    const submitEl= form.querySelector('#cbSubmit');
+
+    submitEl.addEventListener('click', () => {
+      const name  = nameEl.value.trim();
+      const phone = phoneEl.value.trim();
+      if (honeyEl.value) return;
+      if (!name || !phone) { errEl.style.display = 'block'; return; }
+      errEl.style.display = 'none';
+      [nameEl, phoneEl, submitEl].forEach(el => el.disabled = true);
+      submitEl.textContent = 'Sending…';
+      addUser(name + ' — ' + phone);
+
+      fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: 'New chatbot lead — portfolio',
+          _honey: '',
+          Name: name,
+          WhatsApp: phone,
+          Interest: lead.interest  || 'Not specified',
+          Budget:   lead.budget    || 'Not specified',
+          Timeline: lead.timeline  || 'Not specified',
+          Page: window.location.href,
+          Time: new Date().toString()
+        })
+      })
+      .then(r => r.json())
+      .then(() => {
+        form.remove();
+        typing(() => {
+          addBot('Thanks, ' + escapeHtml(name) + '! 🎉 Kerolos will reach out on WhatsApp soon.');
+          typing(() => {
+            choices([
+              { label: '💌 Ask about wedding invitations', say: 'Tell me about wedding invitations.', next: weddingFlow },
+              { label: '🎨 See other services', say: 'Show me other services.', next: servicesMenu },
+              { label: '✅ That\'s all, thanks!', say: 'That\'s all, thanks!', next: () => addBot('Wonderful — talk soon! 🙌') }
+            ]);
+          }, 500);
+        });
+      })
+      .catch(() => {
+        [nameEl, phoneEl, submitEl].forEach(el => el.disabled = false);
+        submitEl.textContent = 'Send ✓';
+        typing(() => {
+          addBot('Something went wrong. You can also reach Kerolos directly at <a href="mailto:' + EMAIL + '" style="color:var(--accent)">' + EMAIL + '</a>.');
+        });
+      });
+    });
+  }
+
+  /* ---- Open / close / restart ---- */
+  function resetConvo() {
     lead = { interest: null, timeline: null, budget: null };
-    messages.innerHTML = '';
+    cbMessages.innerHTML = '';
   }
 
-  function openChat(){
-    panel.classList.add('cb-open');
-    toggle.classList.remove('cb-unseen');
-    // Every time the chat is opened, the conversation is rewritten from
-    // scratch — a fresh welcome and a fresh set of enticing choices.
-    resetConversation();
-    playBell();
-    showTyping(startConversation, 450);
-  }
-
-  function closeChat(){
-    panel.classList.remove('cb-open');
-  }
-
-  toggle.addEventListener('click', () => {
-    if (panel.classList.contains('cb-open')) {
-      closeChat();
-    } else {
-      openChat();
+  function openChat() {
+    const now = Date.now();
+    const shouldReset = !openedAt || (now - openedAt) > 10 * 60 * 1000;
+    cbPanel.classList.add('cb-open');
+    cbToggle.classList.remove('cb-unseen');
+    if (shouldReset || !cbMessages.innerHTML.trim()) {
+      resetConvo();
+      playBell();
+      typing(startConvo, 420);
     }
+    openedAt = now;
+  }
+
+  function closeChat() { cbPanel.classList.remove('cb-open'); }
+
+  cbToggle.addEventListener('click', () => {
+    cbPanel.classList.contains('cb-open') ? closeChat() : openChat();
   });
-  closeBtn.addEventListener('click', closeChat);
-  restartBtn.addEventListener('click', () => {
-    resetConversation();
-    playBell();
-    showTyping(startConversation, 300);
+  cbClose.addEventListener('click', closeChat);
+  cbRestart.addEventListener('click', () => {
+    resetConvo(); openedAt = null; playBell(); typing(startConvo, 300);
   });
+
+  /* Close on Escape */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && cbPanel.classList.contains('cb-open')) closeChat();
+  });
+
 })();
 </script>
-
 </body>
 </html>
