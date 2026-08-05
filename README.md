@@ -78,10 +78,9 @@ kerolos-design/
 ## Local development
 
 ```bash
-git clone https://github.com/kerolosadly584-cyber/kerolos-design.git
-cd kerolos-design
-python3 -m http.server 8000
-# open http://localhost:8000
+git clone [https://kerolosadly-co.github.io/Portfolio/]
+cd kerolos-Portfolio
+
 ```
 
 ## Deployment
